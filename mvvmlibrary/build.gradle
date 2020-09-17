@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    implementation project(':statelibrary')
+    //MvvM
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-runtime:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.2.0"
+/*    //OkHttp
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    //Retrofit 2.0
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    //rxjava rxandroid
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.14'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'*/
+    //注解库
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    //可以改变statusBar背景和文字电池相关颜色
+    api 'com.gyf.immersionbar:immersionbar:3.0.0'
+
+    api 'com.trello.rxlifecycle4:rxlifecycle:4.0.0'
+
+// If you want to bind to Android-specific lifecycles
+    api 'com.trello.rxlifecycle4:rxlifecycle-android:4.0.0'
+    // If you want pre-written Activities and Fragments you can subclass as providers
+    api 'com.trello.rxlifecycle4:rxlifecycle-components:4.0.0'
+
+}
