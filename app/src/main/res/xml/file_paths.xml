@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="name"
+        path=".future/files" />
+    <external-path
+        name="name"
+        path="jiwei" />
+    <root-path
+        name="root"
+        path="." />
+    <files-path
+        name="files"
+        path="." />
+</paths>

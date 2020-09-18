@@ -32,8 +32,8 @@ public class ResponseParser<T> extends AbstractParser<T> {
         final Type type = ParameterizedTypeImpl.get(LzyBaseResponse.class, mType); //获取泛型类型
         LzyBaseResponse<T> data = convert(response, type);
         T t = data.getData(); //获取data字段
-        if (data.getCode() != 0 || t == null) {//这里假设code不等于200，代表数据不正确，抛出异常
-            throw new ParseException(String.valueOf(data.getCode()), data.getMsg(), response);
+        if (data.getErrorCode() != 0 || t == null) {//这里假设code不等于200，代表数据不正确，抛出异常
+            throw new ParseException(String.valueOf(data.getErrorCode()), data.getErrorMsg(), response);
         }
         return t;
     }

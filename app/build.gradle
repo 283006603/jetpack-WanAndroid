@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.practice"
-        minSdkVersion 22
+        minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -17,9 +17,9 @@ android {
             annotationProcessorOptions {
                 arguments = [
                         //必须，告知RxHttp你依赖的okhttp版本，目前已适配 v3.12.0 - v4.8.1版本  (v4.3.0除外)
-                        rxhttp_okhttp: '4.8.1',
+                        rxhttp_okhttp : '4.8.1',
                         //使用asXxx方法时必须，告知RxHttp你依赖的rxjava版本，可传入rxjava2、rxjava3
-                        rxhttp_rxjava: 'rxjava3',
+                        rxhttp_rxjava : 'rxjava3',
                         rxhttp_package: 'rxhttp'   //非必须，指定RxHttp类包名
                 ]
             }
@@ -44,16 +44,17 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation project(path: ':mvvmlibrary')
+    implementation project(path: ':ScreenAdaptation')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation "android.arch.lifecycle:extensions:1.1.1"
-
 
     //以下3个为必须，
     implementation 'com.ljx.rxhttp:rxhttp:2.4.0'
     implementation 'com.squareup.okhttp3:okhttp:4.8.1' //rxhttp v2.2.2版本起，需要手动依赖okhttp
-    annotationProcessor 'com.ljx.rxhttp:rxhttp-compiler:2.4.0' //生成RxHttp类，非kotlin项目，请使用annotationProcessor代替kapt
+    annotationProcessor 'com.ljx.rxhttp:rxhttp-compiler:2.4.0'
+    //生成RxHttp类，非kotlin项目，请使用annotationProcessor代替kapt
 
     implementation 'com.ljx.rxlife:rxlife-coroutine:2.0.1' //管理协程生命周期，页面销毁，关闭请求
 
@@ -65,4 +66,30 @@ dependencies {
 
     //非必须，根据自己需求选择 RxHttp默认内置了GsonConverter
     implementation 'com.ljx.rxhttp:converter-fastjson:2.4.0'
+    //动态申请库
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    //id注解库
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    //解决65535问题
+    implementation 'androidx.multidex:multidex:2.0.1'
+    //v4适应包
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //adapter适配器
+//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1'
+    //图片加载工具
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    //上下拉刷新框
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    implementation 'com.scwang.smart:refresh-footer-classics:2.0.1'
+    implementation 'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头
+    implementation 'com.scwang.smart:refresh-footer-ball:2.0.1'
+    //Room数据库
+    def room_version = "2.2.5"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    //空视图布局
+//    implementation 'com.github.czy1121:loadinglayout:1.0.1'
+    //轮播图
+    implementation 'com.youth.banner:banner:2.1.0'
 }

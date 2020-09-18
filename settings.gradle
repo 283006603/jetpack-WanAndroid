@@ -1,3 +1,4 @@
+include ':ScreenAdaptation'
 include ':mvvmlibrary'
 include ':app'
 rootProject.name = "Practice"
