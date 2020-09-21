@@ -40,12 +40,18 @@ android {
     }
 }
 
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation project(path: ':mvvmlibrary')
     implementation project(path: ':ScreenAdaptation')
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -76,20 +82,20 @@ dependencies {
     //v4适应包
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //adapter适配器
-//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1'
     //图片加载工具
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     //上下拉刷新框
-    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
-    implementation 'com.scwang.smart:refresh-footer-classics:2.0.1'
-    implementation 'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头
-    implementation 'com.scwang.smart:refresh-footer-ball:2.0.1'
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'//核心必须依赖
+    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'//经典刷新头
+    implementation 'com.scwang.smart:refresh-footer-ball:2.0.1'//球脉冲加载
     //Room数据库
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     //空视图布局
-//    implementation 'com.github.czy1121:loadinglayout:1.0.1'
+    implementation 'com.github.czy1121:loadinglayout:1.0.1'
     //轮播图
     implementation 'com.youth.banner:banner:2.1.0'
+    implementation 'com.android.support:design:29.0.0'
 }
