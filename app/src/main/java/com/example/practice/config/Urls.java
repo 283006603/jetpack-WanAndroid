@@ -2,9 +2,16 @@ package com.example.practice.config;
 
 public class Urls{
  /**
-  * 分页获取诗词列表
+  * 首页RecycleView列表
   */
- public static final String GET_POEM_LIST = "/article/list/%d/json";
+ public static final String GET_MAIN_LIST = "/article/list/%d/json";
+
+ /**
+  * 首页Banner
+  */
+ public static final String GET_MAIN_BANNER = "/banner/json";
+
+
 
 
 

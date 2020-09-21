@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.practice.R;
 import com.example.practice.adapter.MainArticleAdapter;
 import com.example.practice.base.BaseFragment;
@@ -37,22 +39,23 @@ public class MainFragment extends BaseFragment{
     RecyclerView mainRecycleview;
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
-    @BindView(R.id.main_banner)
-    Banner mainBanner;
     private View headView;
     private MainViewModel mainViewModel;
     public int page = 0;
     public List<MainArticleBean> list = new ArrayList<>();
     private MainArticleAdapter adapter;
     private PageList<MainArticleBean> pageList;
+    private Banner mainBanner;
 
     @Override
     public void initView(Bundle state){
         super.initView(state);
         mainRecycleview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        adapter = new MainArticleAdapter(list, getContext());
-        mainRecycleview.setAdapter(adapter);
+        adapter = new MainArticleAdapter(R.layout.item_main_article,list);
         headView = LayoutInflater.from(getContext()).inflate(R.layout.item_main_header, null);
+        mainBanner = headView.findViewById(R.id.main_banner);
+        adapter.addHeaderView(headView);
+        mainRecycleview.setAdapter(adapter);
         initListener();
     }
 
@@ -70,6 +73,13 @@ public class MainFragment extends BaseFragment{
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout){
                 mainViewModel.getMainArticle(++page);
+            }
+        });
+
+
+        adapter.setOnItemClickListener(new OnItemClickListener(){
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){
             }
         });
     }
@@ -126,6 +136,8 @@ public class MainFragment extends BaseFragment{
                     refreshLayout.finishLoadMore();
                 }
             }
+        }else if(key.equals(Constants.GET_MAIN_BANNER)){
+
         }else if(key.equals(Constants.REQUEST_ERROR)){
             refreshLayout.finishRefresh();
             refreshLayout.finishLoadMore();
