@@ -11,8 +11,14 @@ public class Urls{
   */
  public static final String GET_MAIN_BANNER = "/banner/json";
 
+ /**
+  * 首页微信公众号
+  */
+ public static final String GET_WECHAT_ARTICLE = "/wxarticle/chapters/json";
 
-
-
+ /**
+  * 首页微信公众号历史数据
+  */
+ public static final String GET_WECHAT_ARTICLE_LIST = "/wxarticle/list/%d/%d/json";
 
 }

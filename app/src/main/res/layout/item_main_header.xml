@@ -4,11 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.MainFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:banner="http://schemas.android.com/apk/res-auto"
     >
     <!-- TODO: Update blank fragment layout -->
   <com.youth.banner.Banner
       android:layout_width="match_parent"
-      android:layout_height="@dimen/dp_240"
+      android:layout_height="@dimen/dp_180"
       android:id="@+id/main_banner"
+      app:banner_auto_loop="true"
       />
+    
+    <com.example.practice.widge.gridviewpager.GridViewPager
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        android:layout_below="@id/main_banner"
+        android:id="@+id/viewpager"
+        android:background="@android:color/white"
+        app:itemLayoutId="@layout/item_home_wechat_authors"
+        android:gravity="center_vertical"
+        />
 </RelativeLayout>

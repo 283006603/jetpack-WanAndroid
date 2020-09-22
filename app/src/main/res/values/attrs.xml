@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="IndicatorView">
+        <attr name="radius" format="dimension" />
+        <attr name="distance" format="dimension" />
+        <attr name="normalColor" format="color" />
+        <attr name="selectedColor" format="color" />
+    </declare-styleable>
+    
+    <declare-styleable name="GridViewPager">
+        <attr name="itemLayoutId" format="integer|reference" />
+        <attr name="columnSize" format="integer|reference" />
+        <attr name="rowSize" format="integer|reference" />
+    </declare-styleable>
+    
+</resources>

@@ -1,10 +1,12 @@
 package com.example.practice.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.example.practice.bean.BannerBean;
 import com.example.practice.bean.MainArticleBean;
 import com.example.practice.bean.PageList;
+import com.example.practice.bean.WeChatArticle;
 import com.example.practice.config.Constants;
 import com.example.practice.config.Urls;
 import com.wljy.mvvmlibrary.base.AbsViewModel;
@@ -44,6 +46,21 @@ public class MainViewModel extends AbsViewModel{
                 }else{
                     postData(Constants.GET_MAIN_ARTICLE_LOADMORE, mainArticleBeanPageList);
                 }
+            }
+        }, new Consumer<Throwable>(){
+            @Override
+            public void accept(Throwable throwable) throws Throwable{
+                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+            }
+        });
+    }
+
+    public void getWeChatArticle(){
+        RxHttp.get(Urls.GET_WECHAT_ARTICLE).asResponseList(WeChatArticle.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<WeChatArticle>>(){
+            @Override
+            public void accept(List<WeChatArticle> weChatArticles) throws Throwable{
+                Log.d("MainViewModel", "weChatArticles.size():" + weChatArticles.size());
+                postData(Constants.GET_MAIN_WECHAT_ARTICLE,weChatArticles);
             }
         }, new Consumer<Throwable>(){
             @Override
