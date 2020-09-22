@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +44,8 @@ public class WeChatDetailActivity extends BaseActivity{
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
         getInitData();
+        recycleview.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+
     }
 
     private void getInitData(){
