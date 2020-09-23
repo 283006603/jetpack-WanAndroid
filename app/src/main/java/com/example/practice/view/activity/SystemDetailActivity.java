@@ -10,6 +10,7 @@ import com.example.practice.adapter.MainArticleAdapter;
 import com.example.practice.base.BaseActivity;
 import com.example.practice.bean.MainArticleBean;
 import com.example.practice.bean.PageList;
+import com.example.practice.bean.SystemListBean;
 import com.example.practice.config.Constants;
 import com.example.practice.viewmodel.MainViewModel;
 import com.gyf.immersionbar.ImmersionBar;
@@ -28,7 +29,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
-public class WeChatDetailActivity extends BaseActivity{
+public class SystemDetailActivity extends BaseActivity{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -43,6 +44,7 @@ public class WeChatDetailActivity extends BaseActivity{
     private int page=0;
     private PageList<MainArticleBean> pageList;
     private String name;
+    private SystemListBean.ChildrenBean childrenBean;
 
     @Override
     public boolean useImmersionBar(){
@@ -66,8 +68,9 @@ public class WeChatDetailActivity extends BaseActivity{
     private void getInitData(){
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            id = extras.getInt(Constants.ID, -1);
-            name = extras.getString(Constants.TITILE);
+            childrenBean = (SystemListBean.ChildrenBean) extras.getSerializable("childrenBean");
+            id = childrenBean.getId();
+            name = childrenBean.getName();
         }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -123,7 +126,7 @@ public class WeChatDetailActivity extends BaseActivity{
 
     @Override
     public void getRemoteData(){
-        mainViewModel.getWeChatDetail(id,page);
+        mainViewModel.getSystemDetail(page,id);
     }
 
     @Override

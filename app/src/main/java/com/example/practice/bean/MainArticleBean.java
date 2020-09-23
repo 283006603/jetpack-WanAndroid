@@ -16,25 +16,25 @@ public class MainArticleBean{
      * desc :
      * descMd :
      * envelopePic :
-     * fresh : true
-     * id : 15296
-     * link : https://mp.weixin.qq.com/s/N45bKKtggkBqtAr6d5eMUw
-     * niceDate : 2小时前
-     * niceShareDate : 2小时前
+     * fresh : false
+     * id : 15276
+     * link : https://juejin.im/post/6873476209737629709/
+     * niceDate : 2020-09-18 13:31
+     * niceShareDate : 2020-09-18 13:31
      * origin :
      * prefix :
      * projectLink :
-     * publishTime : 1600657405000
+     * publishTime : 1600407099000
      * realSuperChapterId : 493
      * selfVisible : 0
-     * shareDate : 1600657405000
-     * shareUser : ZYLAB
+     * shareDate : 1600407099000
+     * shareUser : Amter
      * superChapterId : 494
      * superChapterName : 广场Tab
      * tags : []
-     * title : 面试官带你学安卓 - 从安卓的事件分发说起
+     * title : Android 网络框架之OkHttp源码解析
      * type : 0
-     * userId : 10577
+     * userId : 49976
      * visible : 1
      * zan : 0
      */

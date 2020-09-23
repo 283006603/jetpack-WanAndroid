@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".view.activity.WeChatDetailActivity">
+    
+    <TextView
+        android:id="@+id/tv_left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="安卓弘扬"
+        android:gravity="center"
+        android:textSize="@dimen/sp_18"
+        android:textColor="@color/color_333"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:padding="@dimen/dp_10"
+        android:background="@drawable/selector_tv_bg"
+        />
+</LinearLayout>

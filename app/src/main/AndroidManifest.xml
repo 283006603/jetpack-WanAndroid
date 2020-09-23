@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.activity.WeChatDetailActivity"></activity>
+        <activity android:name=".view.activity.SystemDetailActivity"></activity>
         <activity android:name=".view.activity.WebViewActivity" />
         <activity android:name=".view.MainActivity">
             <intent-filter>

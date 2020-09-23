@@ -5,7 +5,6 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -18,6 +17,7 @@ import com.example.practice.bean.MainArticleBean;
 import com.example.practice.bean.PageList;
 import com.example.practice.bean.WeChatArticle;
 import com.example.practice.config.Constants;
+import com.example.practice.view.activity.WeChatDetailActivity;
 import com.example.practice.view.activity.WebViewActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.example.practice.widge.gridviewpager.GridRecyclerAdapter;
@@ -109,7 +109,7 @@ public class MainFragment extends BaseFragment{
         mainBanner.setOnBannerListener(new OnBannerListener(){
             @Override
             public void OnBannerClick(Object data, int position){
-                Toast.makeText(mActivity, "position:" + position, Toast.LENGTH_SHORT).show();
+                goWebActivityForBanner(bannerBeanList.get(position));
             }
         });
         //公众号点击事件
@@ -121,9 +121,20 @@ public class MainFragment extends BaseFragment{
         });
     }
 
+    private void goWebActivityForBanner(BannerBean bannerBean){
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.TITILE, bannerBean.getTitle());
+        bundle.putString(Constants.AUTHOR, "");
+        bundle.putInt(Constants.ID, bannerBean.getId());
+        bundle.putString(Constants.URL, bannerBean.getUrl());
+        activity(WebViewActivity.class, bundle);
+    }
+
     private void goWeChatDetailActivity(WeChatArticle weChatArticle){
         Bundle bundle=new Bundle();
         bundle.putInt(Constants.ID,weChatArticle.getId());
+        bundle.putString(Constants.TITILE,weChatArticle.getName());
+        activity(WeChatDetailActivity.class,bundle);
     }
 
     private void goWebActivity(MainArticleBean mainArticleBean){
@@ -164,7 +175,7 @@ public class MainFragment extends BaseFragment{
                 mainArticleBeanList.addAll(pageList.getDatas());
                 adapter.notifyDataSetChanged();
                 //判断是不是最后一页,如果是，关闭上滑加载,连底部没有数据都不提示
-                if(page == pageList.getTotal() - 1){
+                if(page == pageList.getPageCount() - 1){
                     refreshLayout.setEnableLoadMore(false);
                 }else{
                     refreshLayout.setEnableLoadMore(true);
@@ -183,7 +194,7 @@ public class MainFragment extends BaseFragment{
                     adapter.notifyDataSetChanged();
                 }
                 //判断是否到了底页,得提示,告知用户
-                if(page == pageList.getTotal() - 1){
+                if(page == pageList.getPageCount() - 1){
                     refreshLayout.finishLoadMoreWithNoMoreData();
                 }else{
                     refreshLayout.finishLoadMore();
