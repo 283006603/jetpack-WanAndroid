@@ -15,6 +15,7 @@ import com.wljy.mvvmlibrary.annotation.Event;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
@@ -30,6 +31,8 @@ public class ProjectFragment extends BaseFragment{
     TabLayout tableLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private MainViewModel mainViewModel;
     private List<ProjectListBean> projectListBeans;
     private List<ProjectPageBean> projectPageBeans;
@@ -47,6 +50,11 @@ public class ProjectFragment extends BaseFragment{
     @Override
     public void initView(Bundle state){
         super.initView(state);
+        initToolBar();
+    }
+
+    private void initToolBar(){
+        
     }
 
     @Override
@@ -65,7 +73,7 @@ public class ProjectFragment extends BaseFragment{
     }
 
     private void relateVpAndTab(){
-        ProjectPageAdapter pageAdapter=new ProjectPageAdapter(getChildFragmentManager(),projectPageBeans);
+        ProjectPageAdapter pageAdapter = new ProjectPageAdapter(getChildFragmentManager(), projectPageBeans);
         viewPager.setAdapter(pageAdapter);
         tableLayout.setupWithViewPager(viewPager);
     }
@@ -73,7 +81,7 @@ public class ProjectFragment extends BaseFragment{
     private List<ProjectPageBean> changePageFragment(){
         projectPageBeans = new ArrayList<>();
         for(ProjectListBean projectListBean : projectListBeans){
-            ProjectPageBean projectPageBean=new ProjectPageBean();
+            ProjectPageBean projectPageBean = new ProjectPageBean();
             projectPageBean.setId(projectListBean.getId());
             projectPageBean.setTitle(projectListBean.getName());
             projectPageBean.setFragment(ProjectPageFragment.newInstance(projectListBean.getId()));

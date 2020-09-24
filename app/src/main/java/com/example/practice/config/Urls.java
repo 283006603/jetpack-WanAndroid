@@ -41,5 +41,5 @@ public class Urls{
  /**
   * 项目列表数据(fragment)
   */
- public static final String GET_PROJECT_LIST_FRAGMENT="/project/list/%d/json?cid=%d";
+ public static final String GET_PROJECT_LIST_FRAGMENT="/project/list/%d/json?cid=%d";  //page从1开始
 }

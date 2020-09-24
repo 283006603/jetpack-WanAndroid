@@ -29,12 +29,12 @@ public class MainViewModel extends AbsViewModel{
         RxHttp.get(Urls.GET_MAIN_BANNER).asResponseList(BannerBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<BannerBean>>(){
             @Override
             public void accept(List<BannerBean> bannerBeans) throws Throwable{
-                postData(Constants.GET_MAIN_BANNER,bannerBeans);
+                postData(Constants.GET_MAIN_BANNER, bannerBeans);
             }
         }, new Consumer<Throwable>(){
             @Override
             public void accept(Throwable throwable) throws Throwable{
-                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
     }
@@ -52,7 +52,7 @@ public class MainViewModel extends AbsViewModel{
         }, new Consumer<Throwable>(){
             @Override
             public void accept(Throwable throwable) throws Throwable{
-                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
     }
@@ -62,18 +62,18 @@ public class MainViewModel extends AbsViewModel{
             @Override
             public void accept(List<WeChatArticle> weChatArticles) throws Throwable{
                 Log.d("MainViewModel", "weChatArticles.size():" + weChatArticles.size());
-                postData(Constants.GET_MAIN_WECHAT_ARTICLE,weChatArticles);
+                postData(Constants.GET_MAIN_WECHAT_ARTICLE, weChatArticles);
             }
         }, new Consumer<Throwable>(){
             @Override
             public void accept(Throwable throwable) throws Throwable{
-                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
     }
 
-    public void getWeChatDetail(int wechatid,int page){
-        RxHttp.get(String.format(Urls.GET_WECHAT_ARTICLE_LIST,wechatid, page)).asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
+    public void getWeChatDetail(int wechatid, int page){
+        RxHttp.get(String.format(Urls.GET_WECHAT_ARTICLE_LIST, wechatid, page)).asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
             @Override
             public void accept(PageList<MainArticleBean> mainArticleBeanPageList) throws Throwable{
                 if(page == 0){
@@ -85,7 +85,7 @@ public class MainViewModel extends AbsViewModel{
         }, new Consumer<Throwable>(){
             @Override
             public void accept(Throwable throwable) throws Throwable{
-                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
     }
@@ -95,19 +95,19 @@ public class MainViewModel extends AbsViewModel{
         RxHttp.get(Urls.GET_SYSTEM_LIST).asResponseList(SystemListBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<SystemListBean>>(){
             @Override
             public void accept(List<SystemListBean> systemListBeans) throws Throwable{
-                postData(Constants.GET_SYSTEM_LIST,systemListBeans);
+                postData(Constants.GET_SYSTEM_LIST, systemListBeans);
             }
         }, new Consumer<Throwable>(){
             @Override
             public void accept(Throwable throwable) throws Throwable{
-                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
     }
 
     //点击右边进入详情列表
-    public void getSystemDetail(int page,int id){
-        RxHttp.get(String.format(Urls.GET_SYSTEM_DETAIL, page,id)).asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
+    public void getSystemDetail(int page, int id){
+        RxHttp.get(String.format(Urls.GET_SYSTEM_DETAIL, page, id)).asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
             @Override
             public void accept(PageList<MainArticleBean> mainArticleBeanPageList) throws Throwable{
                 if(page == 0){
@@ -119,7 +119,7 @@ public class MainViewModel extends AbsViewModel{
         }, new Consumer<Throwable>(){
             @Override
             public void accept(Throwable throwable) throws Throwable{
-                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
     }
@@ -129,32 +129,31 @@ public class MainViewModel extends AbsViewModel{
         RxHttp.get(Urls.GET_PROJECT_LIST).asResponseList(ProjectListBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<ProjectListBean>>(){
             @Override
             public void accept(List<ProjectListBean> projectListBeans) throws Throwable{
-                postData(Constants.GET_PROJECT_LIST,projectListBeans);
+                postData(Constants.GET_PROJECT_LIST, projectListBeans);
             }
         }, new Consumer<Throwable>(){
             @Override
             public void accept(Throwable throwable) throws Throwable{
-                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
-
     }
 
-    public void getProjectFragemtList(int page,int cid){
-        RxHttp.get(String.format(Urls.GET_PROJECT_LIST_FRAGMENT,page,cid)).asResponseList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<MainArticleBean>>(){
+    public void getProjectFragemtList(int page, int cid){
+        RxHttp.get(String.format(Urls.GET_PROJECT_LIST_FRAGMENT, page, cid)).asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
             @Override
-            public void accept(List<MainArticleBean> projectListBeans) throws Throwable{
-                postData(Constants.GET_PROJECT_LIST_FRAGMENT,projectListBeans);
+            public void accept(PageList<MainArticleBean> mainArticleBeanPageList) throws Throwable{
+                if(page == 1){
+                    postData(Constants.GET_MAIN_ARTICLE_REFRESH, mainArticleBeanPageList);
+                }else{
+                    postData(Constants.GET_MAIN_ARTICLE_LOADMORE, mainArticleBeanPageList);
+                }
             }
         }, new Consumer<Throwable>(){
             @Override
             public void accept(Throwable throwable) throws Throwable{
-                postData(Constants.REQUEST_ERROR,throwable.getMessage());
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
-
     }
-
-
-
 }
