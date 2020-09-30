@@ -1,5 +1,7 @@
 package com.example.practice.adapter;
 
+import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.example.practice.R;
@@ -25,6 +27,8 @@ public class SystemLeftAdapter extends BaseQuickAdapter<SystemListBean,BaseViewH
     protected void convert(@NotNull BaseViewHolder holder, SystemListBean systemListBean){
         holder.itemView.setSelected(select==holder.getLayoutPosition());
         holder.setText(R.id.tv_left,systemListBean.getName());
+
+        holder.getView(R.id.ima_lable).setVisibility(select==holder.getLayoutPosition()? View.VISIBLE:View.GONE);
     }
 
 

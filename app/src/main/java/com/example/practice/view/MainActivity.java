@@ -144,7 +144,7 @@ public class MainActivity extends BaseActivity{
     @Override
     public void initStatusBar() {
         if (useImmersionBar()) {
-            ImmersionBar.with(this).statusBarDarkFont(false).init();
+            ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.color_white).statusBarDarkFont(true).init();
         }
     }
 }

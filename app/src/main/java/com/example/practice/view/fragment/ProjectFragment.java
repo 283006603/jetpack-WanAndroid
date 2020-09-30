@@ -13,16 +13,16 @@ import com.google.android.material.tabs.TabLayout;
 import com.wljy.mvvmlibrary.annotation.Event;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProjectFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ProjectFragment extends BaseFragment{
@@ -31,8 +31,7 @@ public class ProjectFragment extends BaseFragment{
     TabLayout tableLayout;
     @BindView(R.id.view_pager)
     ViewPager viewPager;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
     private MainViewModel mainViewModel;
     private List<ProjectListBean> projectListBeans;
     private List<ProjectPageBean> projectPageBeans;
@@ -50,12 +49,14 @@ public class ProjectFragment extends BaseFragment{
     @Override
     public void initView(Bundle state){
         super.initView(state);
-        initToolBar();
+        initListener();
     }
 
-    private void initToolBar(){
-        
+    private void initListener(){
+
     }
+
+
 
     @Override
     public void getRemoteData(){
@@ -89,4 +90,9 @@ public class ProjectFragment extends BaseFragment{
         }
         return projectPageBeans;
     }
+
+
+    
+
+
 }

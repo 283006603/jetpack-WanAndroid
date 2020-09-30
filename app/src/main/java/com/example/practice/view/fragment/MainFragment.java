@@ -1,7 +1,7 @@
 package com.example.practice.view.fragment;
 
 import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +75,7 @@ public class MainFragment extends BaseFragment{
         imageAdapter = new ImageBannerAdapter(bannerBeanList, getContext());
         mainBanner.setIndicator(new CircleIndicator(getContext()));
         //        mainBanner.setBannerGalleryEffect(150, 20); //添加画廊效果
-        mainBanner.setAdapter(imageAdapter);
+        mainBanner.setAdapter(imageAdapter).addBannerLifecycleObserver(this);
         adapter.addHeaderView(headView);
         //=====添加公众号
         gridViewPager = headView.findViewById(R.id.viewpager);
@@ -218,7 +218,7 @@ public class MainFragment extends BaseFragment{
             @Override
             public void bindData(GridRecyclerAdapter.ViewHolder viewHolder, WeChatArticle weChatArticle, int position){
                 ShapeDrawable shapeDrawable = new ShapeDrawable();
-                shapeDrawable.setShape(new OvalShape());
+                shapeDrawable.setShape(/*new OvalShape()*/new RoundRectShape(new float[]{20,20,20,20,20,20,20,20},null,null));
                 shapeDrawable.getPaint().setColor(colors[position % colors.length]);
                 viewHolder.setText(R.id.tv_home_author_icon, String.valueOf(weChatArticle.getName().charAt(0))).
                         setText(R.id.tv_home_author_name, weChatArticle.getName()).setBackground(R.id.tv_home_author_icon, shapeDrawable);

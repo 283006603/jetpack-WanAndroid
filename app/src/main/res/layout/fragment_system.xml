@@ -4,18 +4,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.MainFragment"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    
     >
     <!-- TODO: Update blank fragment layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="@dimen/dp_120"
-        android:layout_height="match_parent"
-        android:id="@+id/left_recycleview"
-        />
     
-    <androidx.recyclerview.widget.RecyclerView
+    <include layout="@layout/item_search_show" />
+    
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/right_recycleview"
-        />
+        android:orientation="horizontal"
+        >
+    
+        <com.example.practice.widge.DampScrollView
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="match_parent"
+                android:id="@+id/left_recycleview"
+                />
+    
+        </com.example.practice.widge.DampScrollView>
+    
+    
+    
+        <com.example.practice.widge.DampScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/right_recycleview"
+                android:background="@color/color_white"
+                />
+    
+        </com.example.practice.widge.DampScrollView>
+    </LinearLayout>
+   
 </LinearLayout>

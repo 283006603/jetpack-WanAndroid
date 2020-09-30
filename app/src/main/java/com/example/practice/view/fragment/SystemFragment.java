@@ -1,7 +1,9 @@
 package com.example.practice.view.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -11,6 +13,7 @@ import com.example.practice.adapter.SystemRightAdapter;
 import com.example.practice.base.BaseFragment;
 import com.example.practice.bean.SystemListBean;
 import com.example.practice.config.Constants;
+import com.example.practice.view.activity.SearchActivity;
 import com.example.practice.view.activity.SystemDetailActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.wljy.mvvmlibrary.annotation.Event;
@@ -20,7 +23,6 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +31,7 @@ import butterknife.BindView;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SystemFragment#} factory method to
- * create an instance of this fragment.
+ * create an instance of this fragment.仿拼多多或扑扑的分类栏
  */
 public class SystemFragment extends BaseFragment{
 
@@ -37,6 +39,8 @@ public class SystemFragment extends BaseFragment{
     RecyclerView leftRecycleview;
     @BindView(R.id.right_recycleview)
     RecyclerView rightRecycleview;
+    @BindView(R.id.rela_search)
+    RelativeLayout relaSearch;
     private MainViewModel mainViewModel;
     private List<SystemListBean> leftList = new ArrayList<>();
     private List<SystemListBean.ChildrenBean> rightList = new ArrayList<>();
@@ -60,9 +64,9 @@ public class SystemFragment extends BaseFragment{
         super.initView(state);
         leftRecycleview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         leftAdapter = new SystemLeftAdapter(R.layout.item_system_left, leftList);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.shape_divider_space, null));
-        leftRecycleview.addItemDecoration(itemDecoration);
+        //        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        //        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.shape_divider_space, null));
+        //        leftRecycleview.addItemDecoration(itemDecoration);
         leftRecycleview.setAdapter(leftAdapter);
         leftAdapter.setSelect(select);
         //===右边
@@ -76,7 +80,8 @@ public class SystemFragment extends BaseFragment{
         leftAdapter.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){
-                if(select==position) return;
+                if(select == position)
+                    return;
                 leftAdapter.setSelect(position);
                 rightList.clear();
                 children = leftList.get(position).getChildren();
@@ -86,19 +91,29 @@ public class SystemFragment extends BaseFragment{
                 select = position;
             }
         });
-
         rightAdapter.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){
                 goSystemDetailActivity(rightList.get(position));
             }
         });
+
+        relaSearch.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Log.d("SystemFragment", "aaa");
+                Bundle bundle=new Bundle();
+                bundle.putInt("type",1);
+                bundle.putString("str","按作者名称搜索文章");
+                activity(SearchActivity.class,bundle);
+            }
+        });
     }
 
     private void goSystemDetailActivity(SystemListBean.ChildrenBean childrenBean){
-        Bundle bundle=new Bundle();
-        bundle.putSerializable("childrenBean",childrenBean);
-        activity(SystemDetailActivity.class,bundle);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("childrenBean", childrenBean);
+        activity(SystemDetailActivity.class, bundle);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class RxHttpManager{
                 .addInterceptor(httpLoggingInterceptor).build();
         //RxHttp初始化，自定义OkHttpClient对象，非必须
         //设置debug模式，默认为false，设置为true后，发请求，过滤"RxHttp"能看到请求日志
-        RxHttp.init(client, false);
+        RxHttp.init(client, true);
 
     }
 }
