@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:text="@string/wan_cancel"
         android:textColor="#000000"
-        android:textSize="@dimen/dp_14"
+        android:textSize="@dimen/dp_16"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_16"
         android:id="@+id/search_cancel"
         />
     
