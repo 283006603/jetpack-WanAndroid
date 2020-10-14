@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.SearchActivity"></activity>
+        <activity android:name=".view.activity.SearchActivity" android:launchMode="singleTop" android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".view.activity.WeChatDetailActivity" />
         <activity android:name=".view.activity.SystemDetailActivity" />
         <activity android:name=".view.activity.WebViewActivity" />

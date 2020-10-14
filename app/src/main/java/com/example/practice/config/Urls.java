@@ -34,6 +34,11 @@ public class Urls{
 
 
  /**
+  * (搜索热词)
+  */
+ public static final String GET_HOT_KEY="/hotkey/json";
+
+ /**
   * 体系搜索框（按照作者昵称搜索文章）
   */
  public static final String GET_AUTHOR_ARTICLE = "/article/list/d%/json?author=s%";//从0开始,不支持模糊匹配
@@ -49,8 +54,5 @@ public class Urls{
  public static final String GET_PROJECT_LIST_FRAGMENT="/project/list/%d/json?cid=%d";  //page从1开始
 
 
- /**
-  * (搜索热词)
-  */
- public static final String GET_HOT_KEY="/hotkey/json";
+
 }

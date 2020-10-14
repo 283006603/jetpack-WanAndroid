@@ -18,6 +18,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/dp_16"
         android:id="@+id/search_cancel"
+        android:visibility="gone"
         />
     
     
@@ -34,6 +35,8 @@
         android:hint="@string/wan_str_edit_content"
         android:drawablePadding="@dimen/dp_8"
         android:layout_toLeftOf="@id/search_cancel"
+        android:singleLine="true"
+        android:imeOptions="actionSearch"
         />
     
     
