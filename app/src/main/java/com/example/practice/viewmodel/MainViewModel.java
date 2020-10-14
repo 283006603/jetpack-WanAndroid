@@ -122,6 +122,10 @@ public class MainViewModel extends AbsViewModel{
                 postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
+    }
+
+
+    public void getHotKey(){
 
     }
 
