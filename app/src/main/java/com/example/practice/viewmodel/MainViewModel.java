@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.practice.bean.BannerBean;
+import com.example.practice.bean.HotKeyBean;
 import com.example.practice.bean.MainArticleBean;
 import com.example.practice.bean.PageList;
 import com.example.practice.bean.ProjectListBean;
@@ -126,12 +127,22 @@ public class MainViewModel extends AbsViewModel{
 
 
     public void getHotKey(){
-
+        RxHttp.get(Urls.GET_HOT_KEY).asResponseList(HotKeyBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<HotKeyBean>>(){
+            @Override
+            public void accept(List<HotKeyBean> hotKeyBeans) throws Throwable{
+                 postData(Constants.GET_HOT_KEY_LIST, hotKeyBeans);
+            }
+        }, new Consumer<Throwable>(){
+            @Override
+            public void accept(Throwable throwable) throws Throwable{
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
+            }
+        });
     }
 
     //体系页面进入搜索页面
-    public void getAuthorArticle(int page,String author){
-        RxHttp.get(String.format(Urls.GET_AUTHOR_ARTICLE,page,author)).asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
+    public void getHotKeyArticle(int page,String hotkey){
+        RxHttp.get(String.format(Urls.GET_AUTHOR_ARTICLE,page,hotkey)).asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
             @Override
             public void accept(PageList<MainArticleBean> mainArticleBeanPageList) throws Throwable{
                 if(page == 0){
@@ -146,6 +157,8 @@ public class MainViewModel extends AbsViewModel{
                 postData(Constants.REQUEST_ERROR, throwable.getMessage());
             }
         });
+
+
     }
 
     //========================================项目

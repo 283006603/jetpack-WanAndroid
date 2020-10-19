@@ -99,4 +99,6 @@ dependencies {
     implementation 'com.youth.banner:banner:2.1.0'
     //tablayout与cardview
     implementation 'com.android.support:design:29.0.0'
+    //搜索/复选样式
+    compile 'com.hyman:flowlayout-lib:1.1.2'
 }

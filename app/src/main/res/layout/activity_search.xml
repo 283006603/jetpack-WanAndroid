@@ -10,11 +10,39 @@
     
     <include layout="@layout/item_search_edit"/>
     
-    <androidx.recyclerview.widget.RecyclerView
+    
+    
+    <com.example.practice.widge.DampScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycleview"
-        />
+        
+        >
+    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_hot_search"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                />
+    
+    
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tag_flow"
+                app:max_select="-1"
+                />
+        </LinearLayout>
+        
+        
+    </com.example.practice.widge.DampScrollView>
+    
     
     
 </LinearLayout>

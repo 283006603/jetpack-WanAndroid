@@ -8,6 +8,7 @@ public class Constants {
     public static final String GET_MAIN_WECHAT_ARTICLE = "GET_MAIN_WECHAT_ARTICLE";
     public static final String GET_SYSTEM_LIST = "GET_SYSTEM_LIST";
     public static final String GET_PROJECT_LIST = "GET_PROJECT_LIST";
+    public static final String GET_HOT_KEY_LIST = "GET_HOT_KEY_LIST";
     //=========================
     public static final String URL="url";
     public static final String ID="id";
