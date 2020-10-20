@@ -12,36 +12,61 @@
     
     
     
-    <com.example.practice.widge.DampScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        
-        >
+        android:layout_height="match_parent">
     
-        <LinearLayout
+    
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:id="@+id/refresh_layout"
+            android:visibility="gone"
             >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/str_hot_search"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recycleview"
                 />
+            
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+       
+        
     
-    
-            <com.zhy.view.flowlayout.TagFlowLayout
+        <com.example.practice.widge.DampScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView"
+            >
+        
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tag_flow"
-                app:max_select="-1"
-                />
-        </LinearLayout>
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_hot_search"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    />
+            
+            
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tag_flow"
+                    app:max_select="-1"
+                    />
+            </LinearLayout>
+    
+    
+        </com.example.practice.widge.DampScrollView>
         
-        
-    </com.example.practice.widge.DampScrollView>
+    </FrameLayout>
+    
+   
     
     
     

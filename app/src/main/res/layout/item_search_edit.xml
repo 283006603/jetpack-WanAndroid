@@ -37,6 +37,7 @@
         android:layout_toLeftOf="@id/search_cancel"
         android:singleLine="true"
         android:imeOptions="actionSearch"
+        
         />
     
     

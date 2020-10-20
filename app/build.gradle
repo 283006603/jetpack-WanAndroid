@@ -32,10 +32,27 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+
+
+
+    signingConfigs {
+        system {
+            storeFile file('..\\system_signature.keystore')
+            storePassword '123456'
+            keyAlias 'systemkey'
+            keyPassword '123456'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.system
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.system
         }
     }
 }

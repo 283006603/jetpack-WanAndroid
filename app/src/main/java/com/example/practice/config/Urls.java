@@ -30,7 +30,7 @@ public class Urls{
  /**
   * 体系详情列表（知识体系下的文章）
   */
- public static final String GET_SYSTEM_DETAIL = "article/list/%d/json?cid=%d";
+ public static final String GET_SYSTEM_DETAIL = "/article/list/%d/json?cid=%d";
 
 
  /**
@@ -38,10 +38,12 @@ public class Urls{
   */
  public static final String GET_HOT_KEY="/hotkey/json";
 
- /**
-  * 体系搜索框（按照作者昵称搜索文章）
-  */
- public static final String GET_AUTHOR_ARTICLE = "/article/list/d%/json?author=s%";//从0开始,不支持模糊匹配
+// /**
+//  * 体系搜索框（按照作者昵称搜索文章）
+//  */
+// public static final String GET_AUTHOR_ARTICLE = "/article/list/d%/json?author=s%";//从0开始,不支持模糊匹配.这里废弃掉。直接用搜索API，此接口仅仅支持作者文章搜索
+
+ public static final String POST_SEARCH="/article/query/0/json";//k ： 搜索关键词
 
  /**
   * (项目分类)<tableLayout联动>

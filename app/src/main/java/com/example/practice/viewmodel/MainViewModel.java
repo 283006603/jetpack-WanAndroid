@@ -140,9 +140,11 @@ public class MainViewModel extends AbsViewModel{
         });
     }
 
-    //体系页面进入搜索页面
-    public void getHotKeyArticle(int page,String hotkey){
-        RxHttp.get(String.format(Urls.GET_AUTHOR_ARTICLE,page,hotkey)).asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
+    //搜索接口
+    public void getSearch(int page,String k){
+        RxHttp.postForm(String.format(Urls.POST_SEARCH,page))
+                .add("k",k)
+                .asResponsePageList(MainArticleBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<PageList<MainArticleBean>>(){
             @Override
             public void accept(PageList<MainArticleBean> mainArticleBeanPageList) throws Throwable{
                 if(page == 0){
