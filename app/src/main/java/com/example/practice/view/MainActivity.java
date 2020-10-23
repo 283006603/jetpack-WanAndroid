@@ -11,7 +11,7 @@ import com.example.practice.base.BaseActivity;
 import com.example.practice.view.fragment.MainFragment;
 import com.example.practice.view.fragment.MineFragment;
 import com.example.practice.view.fragment.ProjectFragment;
-import com.example.practice.view.fragment.SystemFragment;
+import com.example.practice.view.fragment.SystemNavigationFragment;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity{
         ft.add(R.id.fl_main_container, projectFragment);
         fragments.add(projectFragment);
 
-        SystemFragment systemFragment = new SystemFragment();
+        SystemNavigationFragment systemFragment = new SystemNavigationFragment();
         ft.add(R.id.fl_main_container, systemFragment);
         fragments.add(systemFragment);
 

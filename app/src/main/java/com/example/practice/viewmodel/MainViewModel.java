@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.practice.bean.BannerBean;
 import com.example.practice.bean.HotKeyBean;
 import com.example.practice.bean.MainArticleBean;
+import com.example.practice.bean.NavigationListBean;
 import com.example.practice.bean.PageList;
 import com.example.practice.bean.ProjectListBean;
 import com.example.practice.bean.SystemListBean;
@@ -116,6 +117,20 @@ public class MainViewModel extends AbsViewModel{
                 }else{
                     postData(Constants.GET_MAIN_ARTICLE_LOADMORE, mainArticleBeanPageList);
                 }
+            }
+        }, new Consumer<Throwable>(){
+            @Override
+            public void accept(Throwable throwable) throws Throwable{
+                postData(Constants.REQUEST_ERROR, throwable.getMessage());
+            }
+        });
+    }
+    //导航数据
+    public void getNavigation(){
+        RxHttp.get(Urls.GET_NAVIGATION_LIST).asResponseList(NavigationListBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<NavigationListBean>>(){
+            @Override
+            public void accept(List<NavigationListBean> navigationListBeanList) throws Throwable{
+                    postData(Constants.GET_NAVIGATION_LIST, navigationListBeanList);
             }
         }, new Consumer<Throwable>(){
             @Override

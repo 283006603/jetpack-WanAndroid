@@ -1,9 +1,7 @@
 package com.example.practice.view.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -13,7 +11,6 @@ import com.example.practice.adapter.SystemRightAdapter;
 import com.example.practice.base.BaseFragment;
 import com.example.practice.bean.SystemListBean;
 import com.example.practice.config.Constants;
-import com.example.practice.view.activity.SearchActivity;
 import com.example.practice.view.activity.SystemDetailActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.wljy.mvvmlibrary.annotation.Event;
@@ -39,8 +36,7 @@ public class SystemFragment extends BaseFragment{
     RecyclerView leftRecycleview;
     @BindView(R.id.right_recycleview)
     RecyclerView rightRecycleview;
-    @BindView(R.id.rela_search)
-    RelativeLayout relaSearch;
+
     private MainViewModel mainViewModel;
     private List<SystemListBean> leftList = new ArrayList<>();
     private List<SystemListBean.ChildrenBean> rightList = new ArrayList<>();
@@ -98,16 +94,7 @@ public class SystemFragment extends BaseFragment{
             }
         });
 
-        relaSearch.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Log.d("SystemFragment", "aaa");
-                Bundle bundle=new Bundle();
-                bundle.putInt("type",1);
-                bundle.putString("str","按作者名称搜索文章");
-                activity(SearchActivity.class,bundle);
-            }
-        });
+
     }
 
     private void goSystemDetailActivity(SystemListBean.ChildrenBean childrenBean){

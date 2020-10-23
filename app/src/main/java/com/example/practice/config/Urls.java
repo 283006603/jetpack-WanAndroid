@@ -34,6 +34,11 @@ public class Urls{
 
 
  /**
+  * 与体系合并到一个fragment（导航数据）
+  */
+ public static final String GET_NAVIGATION_LIST = "/navi/json";
+
+ /**
   * (搜索热词)
   */
  public static final String GET_HOT_KEY="/hotkey/json";
