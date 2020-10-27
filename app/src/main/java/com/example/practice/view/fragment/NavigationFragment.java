@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.practice.R;
 import com.example.practice.adapter.NavigationLeftAdapter;
@@ -13,6 +12,7 @@ import com.example.practice.adapter.NavigationRightAdapter;
 import com.example.practice.base.BaseFragment;
 import com.example.practice.bean.NavigationListBean;
 import com.example.practice.config.Constants;
+import com.example.practice.view.activity.WebViewActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.wljy.mvvmlibrary.annotation.Event;
 
@@ -71,6 +71,7 @@ public class NavigationFragment extends BaseFragment{
         leftAdapter.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){
+                Log.d("NavigationFragment", "position:" + position);
                 linearLayoutManager.scrollToPositionWithOffset(position,0);
                 if(select == position)
                     return;
@@ -82,10 +83,10 @@ public class NavigationFragment extends BaseFragment{
             }
         });
 
-        rightAdapter.setOnItemChildClickListener(new OnItemChildClickListener(){
+        rightAdapter.setOnTagSelectListener(new NavigationRightAdapter.TagSelectListener(){
             @Override
-            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){
-                Log.d("NavigationFragment", "position:" + position);
+            public void onTagSelect(int position,int tagPosition){
+                goWebActivity(list.get(position).getArticles().get(tagPosition));
             }
         });
 
@@ -93,6 +94,15 @@ public class NavigationFragment extends BaseFragment{
 
 
 
+    }
+
+    private void goWebActivity(NavigationListBean.ArticlesBean mainArticleBean){
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.TITILE, mainArticleBean.getTitle());
+        bundle.putString(Constants.AUTHOR, mainArticleBean.getAuthor());
+        bundle.putInt(Constants.ID, mainArticleBean.getId());
+        bundle.putString(Constants.URL, mainArticleBean.getLink());
+        activity(WebViewActivity.class, bundle);
     }
 
     @Override

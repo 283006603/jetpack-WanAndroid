@@ -40,5 +40,24 @@ public class NavigationRightAdapter extends BaseQuickAdapter<NavigationListBean,
                 return textView;
             }
         });
+
+        tagFlow.setOnTagClickListener(new TagFlowLayout.OnTagClickListener(){
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent){
+                mtagSelectListener.onTagSelect(holder.getLayoutPosition(),position);
+                return true;
+            }
+        });
+
+    }
+
+
+    TagSelectListener mtagSelectListener;
+    public void setOnTagSelectListener(TagSelectListener tagSelectListener){
+        mtagSelectListener=tagSelectListener;
+    }
+
+   public  interface TagSelectListener {
+        void onTagSelect(int positon,int tagPosition);
     }
 }
