@@ -24,4 +24,7 @@ public class RxHttpManager{
         RxHttp.init(client, true);
 
     }
+
+
+
 }

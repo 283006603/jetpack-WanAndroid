@@ -17,7 +17,7 @@
     
     <com.example.practice.widge.gridviewpager.GridViewPager
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_200"
+        android:layout_height="@dimen/dp_210"
         android:layout_below="@id/main_banner"
         android:id="@+id/viewpager"
         android:background="@android:color/white"

@@ -10,11 +10,19 @@ public class Constants {
     public static final String GET_NAVIGATION_LIST = "GET_NAVIGATION_LIST";
     public static final String GET_PROJECT_LIST = "GET_PROJECT_LIST";
     public static final String GET_HOT_KEY_LIST = "GET_HOT_KEY_LIST";
+    public static final String GET_LOGIN_RESULT="GET_LOGIN_RESULT";
+    public static final String GET_REGISTER_RESULT="GET_REGISTER_RESULT";
     //=========================
     public static final String URL="url";
     public static final String ID="id";
     public static final String AUTHOR="author";
     public static final String TITILE="title";
+    //=========================
+    public static final String USERID="userid";
+    public static final String ISLOGIN="islogin";
+    public static final String ACCOUNT="account";
+    public static final String PASSWORD="password";
+
 
 
 }

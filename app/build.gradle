@@ -117,5 +117,5 @@ dependencies {
     //tablayout与cardview
     implementation 'com.android.support:design:29.0.0'
     //搜索/复选样式
-    compile 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
 }
