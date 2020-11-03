@@ -71,4 +71,7 @@ public class Urls{
      * (注册)
      */
     public static final String POST_REGISTER="/user/register";
+
+    //==========================================================================================个人中心，妹子
+    public static final String GET_MEIZI="https://gank.io/api/v2/data/category/Girl/type/Girl/page/%d/count/%d";
 }

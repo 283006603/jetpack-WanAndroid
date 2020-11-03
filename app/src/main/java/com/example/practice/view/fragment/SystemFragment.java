@@ -56,8 +56,8 @@ public class SystemFragment extends BaseFragment{
     }
 
     @Override
-    public void initView(Bundle state){
-        super.initView(state);
+    public void initView(View rootView){
+        super.initView(rootView);
         leftRecycleview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         leftAdapter = new SystemLeftAdapter(R.layout.item_system_left, leftList);
         //        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);

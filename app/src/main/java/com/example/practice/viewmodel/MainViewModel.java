@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.example.practice.bean.BannerBean;
+import com.example.practice.bean.GankLzyBaseResponse;
+import com.example.practice.bean.GankMeiziBean;
 import com.example.practice.bean.HotKeyBean;
 import com.example.practice.bean.LoginBean;
 import com.example.practice.bean.MainArticleBean;
@@ -233,6 +235,28 @@ public class MainViewModel extends AbsViewModel{
             public void accept(LoginBean loginBean) throws Throwable{//errorcode为0就为登录成功
                 Log.d("MainViewModel", loginBean.toString());
                 postData(Constants.GET_REGISTER_RESULT,loginBean);
+            }
+        }, new Consumer<Throwable>(){
+            @Override
+            public void accept(Throwable throwable) throws Throwable{
+                postData(Constants.REQUEST_ERROR,((ParseException) throwable).getMessage());
+            }
+        });
+    }
+
+
+    //此接口比较特殊，数据结构和以往不一样，WanAndroid的API加载页信息都在data里面，不在最外层，而干货集中营加载页信息都在最外层和code平级，因此需要拿到整个最外层的对象
+    //所以开辟了GankResponseParser和GankLzyBaseResponse用于这个API的特殊解析
+    public void getMeizi(int page,int pagecount){
+        RxHttp.get(String.format(Urls.GET_MEIZI,page,pagecount))
+               .asGankResponseList(GankMeiziBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<GankLzyBaseResponse<List<GankMeiziBean>>>(){
+            @Override
+            public void accept(GankLzyBaseResponse<List<GankMeiziBean>> listGankLzyBaseResponse) throws Throwable{
+                if(page == 1){
+                    postData(Constants.GET_MEIZI_RESULT_REFRESH, listGankLzyBaseResponse);
+                }else{
+                    postData(Constants.GET_MEIZI_RESULT_LOADMORE, listGankLzyBaseResponse);
+                }
             }
         }, new Consumer<Throwable>(){
             @Override

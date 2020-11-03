@@ -118,4 +118,6 @@ dependencies {
     implementation 'com.android.support:design:29.0.0'
     //搜索/复选样式
     implementation 'com.hyman:flowlayout-lib:1.1.2'
+    //图片缩放
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }

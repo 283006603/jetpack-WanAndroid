@@ -8,17 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.trello.rxlifecycle4.components.support.RxFragment;
+import com.wljy.mvvmlibrary.R;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.trello.rxlifecycle4.components.support.RxFragment;
-import com.wljy.mvvmlibrary.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.ButterKnife;
 
 
@@ -32,7 +28,7 @@ public abstract class AbsLifecycleFragment extends RxFragment {
 
     }
 
-    public void initView(Bundle state){
+    public void initView(View rootView){
         initViewModel();
     }
 
@@ -62,7 +58,7 @@ public abstract class AbsLifecycleFragment extends RxFragment {
         rootView = inflater.inflate(getLayoutResId(), null, false);
         initButterKnife(rootView);
         View contentLayout = rootView.findViewById(getContentResId());
-        initView(savedInstanceState);
+        initView(rootView);
         return rootView;
     }
     private void initButterKnife(View view) {

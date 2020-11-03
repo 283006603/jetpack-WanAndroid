@@ -1,6 +1,7 @@
 package com.example.practice.view.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,6 +79,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Event(key = {Constants.GET_REGISTER_RESULT, Constants.REQUEST_ERROR})
     public void onEvent(String key, Object value){
         if(key.equals(Constants.GET_REGISTER_RESULT)){
+            Log.d("TAG", "bbb");
             LoginActivity.loginActivity.finish();
             LoginBean loginBean = (LoginBean) value;
             SharePrefUtil.saveInt(this, Constants.USERID, loginBean.getId());

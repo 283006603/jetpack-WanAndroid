@@ -12,6 +12,8 @@ public class Constants {
     public static final String GET_HOT_KEY_LIST = "GET_HOT_KEY_LIST";
     public static final String GET_LOGIN_RESULT="GET_LOGIN_RESULT";
     public static final String GET_REGISTER_RESULT="GET_REGISTER_RESULT";
+    public static final String GET_MEIZI_RESULT_REFRESH="GET_MEIZI_RESULT_REFRESH";
+    public static final String GET_MEIZI_RESULT_LOADMORE="GET_MEIZI_RESULT_LOADMORE";
     //=========================
     public static final String URL="url";
     public static final String ID="id";

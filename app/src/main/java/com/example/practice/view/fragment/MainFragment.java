@@ -65,8 +65,8 @@ public class MainFragment extends BaseFragment{
     private int[] colors = {0xffec407a, 0xffab47bc, 0xff29b6f6, 0xff7e57c2, 0xffe24073, 0xffee8360, 0xff26a69a, 0xffef5350, 0xff2baf2b, 0xffffa726};
 
     @Override
-    public void initView(Bundle state){
-        super.initView(state);
+    public void initView(View rootView){
+        super.initView(rootView);
         mainRecycleview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         adapter = new MainArticleAdapter(R.layout.item_main_article, mainArticleBeanList);
         headView = LayoutInflater.from(getContext()).inflate(R.layout.item_main_header, null);

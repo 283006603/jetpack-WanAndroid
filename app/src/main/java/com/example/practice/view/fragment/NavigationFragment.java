@@ -53,8 +53,8 @@ public class NavigationFragment extends BaseFragment{
     }
 
     @Override
-    public void initView(Bundle state){
-        super.initView(state);
+    public void initView(View rootView){
+        super.initView(rootView);
         leftRecycleview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         leftAdapter = new NavigationLeftAdapter(R.layout.item_system_left, list);
         leftRecycleview.setAdapter(leftAdapter);

@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.RegisterActivity"></activity>
+        <activity android:name=".view.activity.MeiZiDetailActivity"></activity>
+        <activity android:name=".view.activity.MeiZiActivity" />
+        <activity android:name=".view.activity.RegisterActivity" />
         <activity android:name=".view.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +28,7 @@
         <activity android:name=".view.activity.WeChatDetailActivity" />
         <activity android:name=".view.activity.SystemDetailActivity" />
         <activity android:name=".view.activity.WebViewActivity" />
-        <activity android:name=".view.MainActivity"></activity>
+        <activity android:name=".view.MainActivity" />
         
         <service
             android:name=".service.InitializeService"
@@ -36,8 +38,8 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 </manifest>

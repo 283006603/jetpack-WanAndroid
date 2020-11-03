@@ -15,6 +15,28 @@
         <attr name="rowSize" format="integer|reference" />
     </declare-styleable>
     
+    <declare-styleable name="ItemView">
+        <attr name="leftIcon" format="integer|reference" />
+        <attr name="rightIcon" format="reference|integer" />
+        <attr name="itemTitle" format="string|reference" />
+        <attr name="itemBackgroundColor" format="color|reference" />
+        <attr name="dividerVisible" format="boolean" />
+        <attr name="dividerLeftMargin" format="dimension" />
+        <attr name="dividerRightMargin" format="dimension" />
+    </declare-styleable>
+    
+    
+    <declare-styleable name="ZoomScrollView">
+        <attr name="zoomTarget" format="integer|reference" />
+        <attr name="zoomMax" format="dimension|reference" />
+    </declare-styleable>
+    
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
     
     
 </resources>

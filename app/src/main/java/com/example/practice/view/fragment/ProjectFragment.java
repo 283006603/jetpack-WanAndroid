@@ -1,6 +1,6 @@
 package com.example.practice.view.fragment;
 
-import android.os.Bundle;
+import android.view.View;
 
 import com.example.practice.R;
 import com.example.practice.adapter.ProjectPageAdapter;
@@ -13,9 +13,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.wljy.mvvmlibrary.annotation.Event;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -47,8 +45,8 @@ public class ProjectFragment extends BaseFragment{
     }
 
     @Override
-    public void initView(Bundle state){
-        super.initView(state);
+    public void initView(View rootView){
+        super.initView(rootView);
         initListener();
     }
 

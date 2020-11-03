@@ -12,7 +12,6 @@ import com.example.practice.view.fragment.MainFragment;
 import com.example.practice.view.fragment.MineFragment;
 import com.example.practice.view.fragment.ProjectFragment;
 import com.example.practice.view.fragment.SystemNavigationFragment;
-import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,6 @@ public class MainActivity extends BaseActivity{
     RadioGroup mainVg;
     @BindView(R.id.fl_main_container)
     FrameLayout mainFramelayout;
-
 
     List<Fragment> fragments = new ArrayList<>();
     private FragmentManager fragmentManager;
@@ -74,38 +72,33 @@ public class MainActivity extends BaseActivity{
         mainVb1.setChecked(true);
     }
 
-    private void selectFragment(int index) {
+    private void selectFragment(int index){
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        for (int i = 0; i < fragments.size(); i++) {
-            if (i == index) {
+        for(int i = 0; i < fragments.size(); i++){
+            if(i == index){
                 ft.show(fragments.get(i));
-            } else {
+            }else{
                 ft.hide(fragments.get(i));
             }
         }
         ft.commit();
     }
 
-    private void createFragment() {
+    private void createFragment(){
         fragments = new ArrayList<>();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-
         MainFragment homeFragment = new MainFragment();
         ft.add(R.id.fl_main_container, homeFragment);
         fragments.add(homeFragment);
-
         ProjectFragment projectFragment = new ProjectFragment();
         ft.add(R.id.fl_main_container, projectFragment);
         fragments.add(projectFragment);
-
         SystemNavigationFragment systemFragment = new SystemNavigationFragment();
         ft.add(R.id.fl_main_container, systemFragment);
         fragments.add(systemFragment);
-
         MineFragment mineFragment = new MineFragment();
         ft.add(R.id.fl_main_container, mineFragment);
         fragments.add(mineFragment);
-
         // 提交事务
         ft.commit();
     }
@@ -123,7 +116,6 @@ public class MainActivity extends BaseActivity{
     public void initViewModel(){
     }
 
-
     @Override
     public void onBackPressed(){
         long currentBackTime = System.currentTimeMillis();
@@ -136,15 +128,10 @@ public class MainActivity extends BaseActivity{
         }
     }
 
+
     @Override
-    public boolean useImmersionBar(){
+    public boolean useImmersionBar() {
         return true;
     }
 
-    @Override
-    public void initStatusBar() {
-        if (useImmersionBar()) {
-            ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.color_white).statusBarDarkFont(true).init();
-        }
-    }
 }

@@ -1,12 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.MainFragment">
+    android:fitsSystemWindows="false"
+    >
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    
+    
+    <com.example.practice.widge.ZoomScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#fff5f5f5"
+        android:id="@+id/sv_scroll"
+        app:zoomMax="120dp"
+        >
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:id="@+id/iv_avatar_background"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test"
+                />
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="-30dp"
+                android:background="@android:color/transparent"
+                >
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/white"
+                    ></LinearLayout>
+                
+                
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/shape_circle_white"
+                    ></View>
+                
+                <com.example.practice.widge.CircleImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="12dp"
+                    android:id="@+id/civ_avatar"
+                    android:background="@drawable/shape_circle_white"
+                    android:padding="5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/test"
+                    />
+                
+                
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="130dp"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    >
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:maxLength="8"
+                        android:text="李文强"
+                        android:textColor="#ff333333"
+                        android:textSize="18sp"
+                        />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:text="努力奋斗，一步一个脚印"
+                        android:textColor="#ff999999"
+                        android:textSize="14sp"
+                        
+                        />
+                
+                </LinearLayout>
+            
+            </RelativeLayout>
+            
+            
+            <com.example.practice.widge.ItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_mine_favorite"
+                android:layout_marginTop="20dp"
+                app:itemTitle="收藏"
+                app:leftIcon="@drawable/ic_mine_favorite"
+                ></com.example.practice.widge.ItemView>
+            
+            
+            <com.example.practice.widge.ItemView
+                android:id="@+id/iv_mine_meizi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemTitle="轻松一刻"
+                app:leftIcon="@drawable/ic_mine_happy" />
+            
+            <com.example.practice.widge.ItemView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemTitle="设置"
+                app:leftIcon="@drawable/ic_mine_setting" />
+            
+            <com.example.practice.widge.ItemView
+                android:id="@+id/iv_mine_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerVisible="false"
+                app:itemTitle="关于"
+                app:leftIcon="@drawable/ic_mine_about" />
+        
+        </LinearLayout>
+    
+    
+    </com.example.practice.widge.ZoomScrollView>
+    
+    
+   
+
+
 </RelativeLayout>

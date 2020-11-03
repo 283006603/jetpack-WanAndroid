@@ -3,8 +3,8 @@ package com.wljy.mvvmlibrary.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
-import com.gyf.immersionbar.ImmersionBar;
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 import com.wljy.mvvmlibrary.R;
 
@@ -65,7 +65,8 @@ public abstract class AbsLifecycleActivity extends RxAppCompatActivity {
 
     //初始化statusBar
     public void initStatusBar() {
-        ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.icon_enabled).statusBarDarkFont(true).init();
+        Log.d("AbsLifecycleActivity", "aaa");
+//        ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.icon_enabled).statusBarDarkFont(true).init();
     }
 
 

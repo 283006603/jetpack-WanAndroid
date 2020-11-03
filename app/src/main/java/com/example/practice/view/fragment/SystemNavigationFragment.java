@@ -47,8 +47,8 @@ public class SystemNavigationFragment extends BaseFragment{
     }
 
     @Override
-    public void initView(Bundle state){
-        super.initView(state);
+    public void initView(View rootView){
+        super.initView(rootView);
         initFragment();
         initListener();
     }

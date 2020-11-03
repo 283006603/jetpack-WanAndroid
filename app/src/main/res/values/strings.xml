@@ -5,4 +5,5 @@
     <string name="wan_cancel">取消</string>
     <string name="wan_str_edit_content">请输入要查找的内容</string>
     <string name="str_hot_search">热门搜索</string>
+    <string name="position_and_count">%1$d / %2$d</string>
 </resources>
