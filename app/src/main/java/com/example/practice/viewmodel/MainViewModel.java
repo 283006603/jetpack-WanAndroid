@@ -31,6 +31,9 @@ public class MainViewModel extends AbsViewModel{
         super(application);
     }
 
+    //对于有暂停网络请求的需求，方法就直接返回disposible   public Disposable getxxxxx();便于得到对象去暂停
+    //对于接口数据经常不太变化的，可以设置局部缓存   setCacheValidTime(24 * 3600 * 1000)24小时,避免发生网络请求
+
     public void getBanner(){
         RxHttp.get(Urls.GET_MAIN_BANNER).asResponseList(BannerBean.class).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<List<BannerBean>>(){
             @Override

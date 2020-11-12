@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     tools:context=".view.fragment.MainFragment"
     android:background="@color/color_white"
+    android:id="@+id/rela_search"
     >
     
     
@@ -37,7 +38,6 @@
         android:layout_toLeftOf="@id/search_cancel"
         android:singleLine="true"
         android:imeOptions="actionSearch"
-        
         />
     
     

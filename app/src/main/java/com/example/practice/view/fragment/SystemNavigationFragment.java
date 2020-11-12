@@ -74,6 +74,10 @@ public class SystemNavigationFragment extends BaseFragment{
                 activity(SearchActivity.class, bundle);
             }
         });
+
+
+
+
     }
 
 

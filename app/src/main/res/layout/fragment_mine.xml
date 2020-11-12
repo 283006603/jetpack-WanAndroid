@@ -108,29 +108,39 @@
                 android:layout_marginTop="20dp"
                 app:itemTitle="收藏"
                 app:leftIcon="@drawable/ic_mine_favorite"
-                ></com.example.practice.widge.ItemView>
+               />
             
             
             <com.example.practice.widge.ItemView
                 android:id="@+id/iv_mine_meizi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:itemTitle="轻松一刻"
+                app:itemTitle="开车"
                 app:leftIcon="@drawable/ic_mine_happy" />
             
             <com.example.practice.widge.ItemView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:itemTitle="设置"
-                app:leftIcon="@drawable/ic_mine_setting" />
+                app:leftIcon="@drawable/ic_mine_setting"
+                android:id="@+id/iv_mine_setting"
+                />
             
             <com.example.practice.widge.ItemView
                 android:id="@+id/iv_mine_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:dividerVisible="false"
                 app:itemTitle="关于"
                 app:leftIcon="@drawable/ic_mine_about" />
+    
+            <com.example.practice.widge.ItemView
+                android:id="@+id/iv_mine_cache"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerVisible="false"
+                app:itemTitle="清除缓存"
+                app:leftIcon="@drawable/ic_mine_about"
+                />
         
         </LinearLayout>
     
