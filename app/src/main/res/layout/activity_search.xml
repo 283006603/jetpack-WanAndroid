@@ -56,7 +56,22 @@
                 <com.zhy.view.flowlayout.TagFlowLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tag_flow"
+                    android:id="@+id/tag_flow_hot"
+                    app:max_select="-1"
+                    />
+    
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="搜索历史"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    />
+    
+                <com.zhy.view.flowlayout.TagFlowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tag_flow_history"
                     app:max_select="-1"
                     />
             </LinearLayout>

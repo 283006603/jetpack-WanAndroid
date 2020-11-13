@@ -29,7 +29,7 @@ public class NavigationRightAdapter extends BaseQuickAdapter<NavigationListBean,
     @Override
     protected void convert(@NotNull BaseViewHolder holder, NavigationListBean navigationListBean){
         holder.setText(R.id.tv_name, navigationListBean.getName());
-        TagFlowLayout tagFlow = holder.getView(R.id.tag_flow);
+        TagFlowLayout tagFlow = holder.getView(R.id.tag_flow_hot);
 
 
         tagFlow.setAdapter(new TagAdapter<NavigationListBean.ArticlesBean>(navigationListBean.getArticles()){

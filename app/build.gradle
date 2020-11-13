@@ -1,15 +1,32 @@
 apply plugin: 'com.android.application'
 
+def TEST_VERSION_CODE = 2
+def TEST_VERSION_NAME = '1.0.2'
+
+def RTM_VERSION_CODE = 1
+def RTM_VERSION_NAME = '1.0.1'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.0"
+
+    project.archivesBaseName = "WanAndroid-AAC"
+
+    signingConfigs {
+        system {
+            storeFile file('..\\system_signature.keystore')
+            storePassword '123456'
+            keyAlias 'systemkey'
+            keyPassword '123456'
+        }
+    }
 
     defaultConfig {
         applicationId "com.example.practice"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode TEST_VERSION_CODE
+        versionName TEST_VERSION_NAME
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -24,15 +41,10 @@ android {
                 ]
             }
         }
+
+        flavorDimensions "rtm"
+        signingConfig signingConfigs.system
     }
-
-    //必须，java 8或更高
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-
 
 
     signingConfigs {
@@ -43,6 +55,36 @@ android {
             keyPassword '123456'
         }
     }
+
+    productFlavors {
+        preview {
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"preview"'//测试环境
+            versionCode TEST_VERSION_CODE
+            versionName TEST_VERSION_NAME
+
+        }
+        rtm {
+            buildConfigField "String", "ENVIRONMENT", '"rtm"'//正式环境
+            versionCode RTM_VERSION_CODE
+            versionName RTM_VERSION_NAME
+        }
+//        uat {
+//            buildConfigField "String", "ENVIRONMENT", '"uat"'
+//            versionCode RTM_VERSION_CODE
+//            versionName RTM_VERSION_NAME
+//        }
+
+        applicationVariants.all {
+            variant ->
+                variant.outputs.all {
+                    outputFileName = "${project.archivesBaseName}_v${versionName}_${variant.productFlavors.name[0]}.apk"
+                }
+        }
+    }
+
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -55,10 +97,22 @@ android {
             signingConfig signingConfigs.system
         }
     }
+
+    //必须，java 8或更高
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 repositories {
     maven { url "https://jitpack.io" }
+
+    google()
+    jcenter()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 

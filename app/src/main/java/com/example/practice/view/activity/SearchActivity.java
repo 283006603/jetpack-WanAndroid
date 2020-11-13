@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -21,9 +22,12 @@ import com.example.practice.R;
 import com.example.practice.adapter.MainArticleAdapter;
 import com.example.practice.base.BaseActivity;
 import com.example.practice.bean.HotKeyBean;
+import com.example.practice.bean.HotKeyHistoryBean;
 import com.example.practice.bean.MainArticleBean;
 import com.example.practice.bean.PageList;
 import com.example.practice.config.Constants;
+import com.example.practice.database.AppDataBase;
+import com.example.practice.database.dao.HotKeyHistoryDao;
 import com.example.practice.viewmodel.MainViewModel;
 import com.example.practice.widge.DampScrollView;
 import com.gyf.immersionbar.ImmersionBar;
@@ -37,12 +41,14 @@ import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SearchActivity extends BaseActivity{
 
@@ -50,8 +56,8 @@ public class SearchActivity extends BaseActivity{
     TextView searchCancel;
     @BindView(R.id.edit_search)
     EditText editSearch;
-    @BindView(R.id.tag_flow)
-    TagFlowLayout tagFlow;
+    @BindView(R.id.tag_flow_hot)
+    TagFlowLayout tagFlowHot;
 
     public String k;
     @BindView(R.id.recycleview)
@@ -60,6 +66,8 @@ public class SearchActivity extends BaseActivity{
     DampScrollView scrollView;
     @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.tag_flow_history)
+    TagFlowLayout tagFlowHistory;
 
     private MainViewModel mainViewModel;
     //    private int page = 0;//搜索作者文章page从0开始
@@ -70,6 +78,8 @@ public class SearchActivity extends BaseActivity{
     public List<MainArticleBean> mainArticleBeanList = new ArrayList<>();
     int page = 0;
     private PageList<MainArticleBean> pageList;
+    private HotKeyHistoryDao hotKeyHistoryDao;
+    private List<HotKeyHistoryBean> hotKeyHistoryBeans;
 
     @Override
     public boolean useImmersionBar(){
@@ -91,11 +101,13 @@ public class SearchActivity extends BaseActivity{
         recycleview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         adapter = new MainArticleAdapter(R.layout.item_main_article, mainArticleBeanList);
         recycleview.setAdapter(adapter);
+        hotKeyHistoryDao = AppDataBase.getInstance().getHotKeyHistoryDao();
+        refreshDataBase();
     }
 
     @Override
     protected void initListener(){
-        tagFlow.setOnTagClickListener(new TagFlowLayout.OnTagClickListener(){
+        tagFlowHot.setOnTagClickListener(new TagFlowLayout.OnTagClickListener(){
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent){
                 k = hotBeanList.get(position).getName();
@@ -103,14 +115,25 @@ public class SearchActivity extends BaseActivity{
                 return true;
             }
         });
+
+
+        tagFlowHistory.setOnTagClickListener(new TagFlowLayout.OnTagClickListener(){
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent){
+                k = hotKeyHistoryBeans.get(position).hot_name_history;
+                editSearch.setText(k + "");
+                return true;
+            }
+        });
+
         editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener(){
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event){
-                Log.d("SearchActivity", "actionId:" + actionId);
-                if(actionId == EditorInfo.IME_ACTION_SEARCH && v.getText().toString().trim() != null){
+                if(actionId == EditorInfo.IME_ACTION_SEARCH && !TextUtils.isEmpty(v.getText().toString().trim())){
                     hideSoftInputFromWindow(SearchActivity.this, editSearch);
                     k = editSearch.getText().toString().trim();
                     page = 0;
+                    inSertDataBase();//点击软键盘的搜索按钮，保存到数据库历史数据
                     showRecycleResult(page, k);
                     return true;
                 }
@@ -142,6 +165,7 @@ public class SearchActivity extends BaseActivity{
             public void onClick(View v){
                 showSoftInputFromWindow(SearchActivity.this, editSearch);
                 showHotResult();
+                refreshDataBase();
             }
         });
         //下拉刷新
@@ -149,14 +173,14 @@ public class SearchActivity extends BaseActivity{
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout){
                 page = 0;
-               showRecycleResult(page,k);
+                showRecycleResult(page, k);
             }
         });
         //上拉加载
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener(){
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout){
-                showRecycleResult(++page,k);
+                showRecycleResult(++page, k);
             }
         });
         //RecycleView点击事件
@@ -166,6 +190,41 @@ public class SearchActivity extends BaseActivity{
                 goWebActivity(mainArticleBeanList.get(position));
             }
         });
+    }
+
+    private void inSertDataBase(){
+        hotKeyHistoryBeans = hotKeyHistoryDao.queryList();
+        HotKeyHistoryBean hotKeyHistoryBean = new HotKeyHistoryBean();
+        hotKeyHistoryBean.hot_name_history = k;
+        //去重，若数据库内有搜索记录这个记录变成首位
+        for(int i = 0; i < hotKeyHistoryBeans.size(); i++){
+            if(hotKeyHistoryBeans.get(i).hot_name_history.equals(k)){
+                hotKeyHistoryBeans.remove(hotKeyHistoryBeans.get(i));
+                break;
+            }
+        }
+        hotKeyHistoryBeans.add(hotKeyHistoryBean);
+        if(hotKeyHistoryBeans.size() > 10){
+            hotKeyHistoryBeans.remove(0);
+        }
+        //清表了再重新插入新得list
+        hotKeyHistoryDao.deleteData();
+        hotKeyHistoryDao.insertItems(hotKeyHistoryBeans);
+    }
+
+    private void refreshDataBase(){
+        hotKeyHistoryBeans = hotKeyHistoryDao.queryList();
+        Collections.reverse(hotKeyHistoryBeans);
+        if(hotKeyHistoryBeans != null || hotKeyHistoryBeans.size() != 0){
+            tagFlowHistory.setAdapter(new TagAdapter<HotKeyHistoryBean>(hotKeyHistoryBeans){
+                @Override
+                public View getView(FlowLayout parent, int position, HotKeyHistoryBean hotKeyHistoryBean){
+                    TextView textView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_tag_flow, tagFlowHistory, false);
+                    textView.setText(hotKeyHistoryBean.hot_name_history);
+                    return textView;
+                }
+            });
+        }
     }
 
     @Override
@@ -188,18 +247,17 @@ public class SearchActivity extends BaseActivity{
         if(key.equals(Constants.GET_HOT_KEY_LIST)){
             hotBeanList = (List) value;
             if(value != null){
-                tagFlow.setAdapter(new TagAdapter<HotKeyBean>(hotBeanList){
+                tagFlowHot.setAdapter(new TagAdapter<HotKeyBean>(hotBeanList){
                     @Override
                     public View getView(FlowLayout parent, int position, HotKeyBean hotKeyBean){
-                        TextView textView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_tag_flow, tagFlow, false);
+                        TextView textView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_tag_flow, tagFlowHot, false);
                         textView.setText(hotBeanList.get(position).getName());
                         return textView;
                     }
                 });
             }
         }else if(key.equals(Constants.GET_MAIN_ARTICLE_REFRESH)){
-            pageList= (PageList<MainArticleBean>) value;
-            Log.d("SearchActivity", "aaa");
+            pageList = (PageList<MainArticleBean>) value;
             if(pageList.getDatas() != null && pageList.getDatas().size() != 0){
                 mainArticleBeanList.clear();
                 mainArticleBeanList.addAll(pageList.getDatas());
@@ -281,5 +339,12 @@ public class SearchActivity extends BaseActivity{
         bundle.putInt(Constants.ID, mainArticleBean.getId());
         bundle.putString(Constants.URL, mainArticleBean.getLink());
         activity(WebViewActivity.class, bundle);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

@@ -37,6 +37,12 @@
                 <action android:name="com.example.practice.service.INIT" />
             </intent-filter>
         </service>
+    
+        <provider
+            android:name=".provider.ApplicationContextProvider"
+            android:authorities="com.future_education.voicelearn.contextprovider"
+            android:exported="false" />
+        
     </application>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />

@@ -3,6 +3,8 @@ package com.example.practice.view.fragment;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -11,6 +13,7 @@ import com.example.practice.R;
 import com.example.practice.base.BaseFragment;
 import com.example.practice.utils.BlurUtil;
 import com.example.practice.utils.CacheToolsUtil;
+import com.example.practice.utils.FullPopupwindow;
 import com.example.practice.view.activity.MeiZiActivity;
 import com.example.practice.widge.ItemView;
 import com.example.practice.widge.ZoomScrollView;
@@ -39,6 +42,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
     ItemView ivMineCache;
     @BindView(R.id.iv_mine_setting)
     ItemView ivMineSetting;
+
+    FullPopupwindow popupWindow;
 
     @Override
     public void initViewModel(){
@@ -78,7 +83,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 break;
             case R.id.iv_mine_cache:
                 try{
-                    showNormalDialog();
+                    showCachelDialog();
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -88,10 +93,21 @@ public class MineFragment extends BaseFragment implements View.OnClickListener{
                 Toast.makeText(mActivity, R.string.str_function_not_open, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_mine_about:
+                showAboutPop();
+                break;
         }
     }
 
-    private void showNormalDialog() throws Exception{
+    private void showAboutPop(){
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.pop_about_mine, null, false);
+        if(popupWindow == null){
+            popupWindow = new FullPopupwindow(getContext());
+            popupWindow.setContentView(view);
+        }
+        popupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.START, 0, 0);
+    }
+
+    private void showCachelDialog() throws Exception{
         final AlertDialog.Builder normalDialog = new AlertDialog.Builder(getContext());
         normalDialog.setTitle("清除缓存");
         normalDialog.setMessage("清除全部缓存:" + CacheToolsUtil.getTotalCacheSize(getContext()));

@@ -7,4 +7,7 @@
     <string name="str_hot_search">热门搜索</string>
     <string name="position_and_count">%1$d / %2$d</string>
     <string name="str_function_not_open">功能暂未开放</string>
+    <string name="str_myblog">我的博客</string>
+    <string name="str_blog_address">https://www.jianshu.com/u/f19974c98abc</string>
+    <string name="str_github_address">https://github.com/283006603</string>
 </resources>
