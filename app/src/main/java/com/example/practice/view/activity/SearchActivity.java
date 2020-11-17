@@ -115,8 +115,6 @@ public class SearchActivity extends BaseActivity{
                 return true;
             }
         });
-
-
         tagFlowHistory.setOnTagClickListener(new TagFlowLayout.OnTagClickListener(){
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent){
@@ -125,7 +123,6 @@ public class SearchActivity extends BaseActivity{
                 return true;
             }
         });
-
         editSearch.setOnEditorActionListener(new TextView.OnEditorActionListener(){
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event){

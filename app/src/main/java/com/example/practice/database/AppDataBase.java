@@ -12,15 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = { HotKeyHistoryBean.class}, version = 1)
+@Database(entities = {HotKeyHistoryBean.class}, version = 1)
 public abstract class AppDataBase extends RoomDatabase{
 
     private static AppDataBase instance;
     private static final String DBName = "wanAndroid_aac";
-
-
 
     public abstract HotKeyHistoryDao getHotKeyHistoryDao();
 
@@ -35,12 +34,11 @@ public abstract class AppDataBase extends RoomDatabase{
         return instance;
     }
 
-
     private static AppDataBase createDB(){
-        int userId =  SharePrefUtil.getInt(ContextProvider.get().getContext(), Constants.USERID,0);
-        return Room.databaseBuilder(ContextProvider.get().getContext(), AppDataBase.class, DBName + userId + ".db").addCallback(new Callback() {
+        int userId = SharePrefUtil.getInt(ContextProvider.get().getContext(), Constants.USERID, 0);
+        return Room.databaseBuilder(ContextProvider.get().getContext(), AppDataBase.class, DBName + userId + ".db").addCallback(new Callback(){
             @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            public void onCreate(@NonNull SupportSQLiteDatabase db){
                 super.onCreate(db);
                 Log.d("AppDataBase", "oncreat");
             }
@@ -50,11 +48,11 @@ public abstract class AppDataBase extends RoomDatabase{
                 super.onOpen(db);
                 Log.d("AppDataBase", "onOpen");
             }
-        })/*.addMigrations(MIGRATION_1_2).addMigrations(MIGRATION_2_1).
-                addMigrations(MIGRATION_2_3).addMigrations(MIGRATION_3_4)*/.allowMainThreadQueries().build();
+        }).addMigrations(MIGRATION_1_2).addMigrations(MIGRATION_2_1).
+                addMigrations(MIGRATION_2_3).addMigrations(MIGRATION_3_4).allowMainThreadQueries().build();
     }
 
-   /* static Migration MIGRATION_1_2 = new Migration(1, 2) {
+    static Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("DROP TABLE IF EXISTS LessonVerBean");
@@ -84,5 +82,5 @@ public abstract class AppDataBase extends RoomDatabase{
         public void migrate(@NonNull SupportSQLiteDatabase database){
             database.execSQL("DROP TABLE IF EXISTS LessonVerBean");
         }
-    };*/
+    };
 }

@@ -17,6 +17,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * Created By 大苏打
  * on 2020/10/23
@@ -48,6 +51,11 @@ public class NavigationRightAdapter extends BaseQuickAdapter<NavigationListBean,
                 return true;
             }
         });
+
+
+
+
+
 
     }
 

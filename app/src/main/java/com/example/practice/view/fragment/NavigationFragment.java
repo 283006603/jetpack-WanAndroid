@@ -25,6 +25,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_DRAGGING;
+
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
@@ -39,8 +42,11 @@ public class NavigationFragment extends BaseFragment{
     List<NavigationListBean> list = new ArrayList<>();
     NavigationLeftAdapter leftAdapter;
     NavigationRightAdapter rightAdapter;
-    private int select;
-    private LinearLayoutManager linearLayoutManager;
+    private int leftSelect, rightVisible;
+    private LinearLayoutManager rightLinearLayoutManager, leftLinearLayoutManager;
+    public String TAG = "NavigationFragment";
+    private int mFirstVisiblePosition = 0;
+    private int mLastVisiblePosition;
 
     @Override
     public void initViewModel(){
@@ -55,13 +61,14 @@ public class NavigationFragment extends BaseFragment{
     @Override
     public void initView(View rootView){
         super.initView(rootView);
-        leftRecycleview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        leftLinearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        leftRecycleview.setLayoutManager(leftLinearLayoutManager);
         leftAdapter = new NavigationLeftAdapter(R.layout.item_system_left, list);
         leftRecycleview.setAdapter(leftAdapter);
-        leftAdapter.setSelect(select);
+        leftAdapter.setSelect(leftSelect);
         //--
-        linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        rightRecycleview.setLayoutManager(linearLayoutManager);
+        rightLinearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        rightRecycleview.setLayoutManager(rightLinearLayoutManager);
         rightAdapter = new NavigationRightAdapter(R.layout.item_navigation_right, list);
         rightRecycleview.setAdapter(rightAdapter);
         initListener();
@@ -72,28 +79,50 @@ public class NavigationFragment extends BaseFragment{
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){
                 Log.d("NavigationFragment", "position:" + position);
-                linearLayoutManager.scrollToPositionWithOffset(position,0);
-                if(select == position)
+                rightLinearLayoutManager.scrollToPositionWithOffset(position, 0);
+                if(leftSelect == position)
                     return;
                 leftAdapter.setSelect(position);
                 leftAdapter.notifyDataSetChanged();
-                select = position;
+                leftSelect = position;
                 //--------
-
             }
         });
-
         rightAdapter.setOnTagSelectListener(new NavigationRightAdapter.TagSelectListener(){
             @Override
-            public void onTagSelect(int position,int tagPosition){
+            public void onTagSelect(int position, int tagPosition){
                 goWebActivity(list.get(position).getArticles().get(tagPosition));
             }
         });
+        rightRecycleview.addOnScrollListener(new RecyclerView.OnScrollListener(){
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState){
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == SCROLL_STATE_IDLE || newState == SCROLL_STATE_DRAGGING){
+                    // DES: 找出当前可视Item位置
+                    RecyclerView.LayoutManager layoutManager = rightRecycleview.getLayoutManager();
+                    if(layoutManager instanceof LinearLayoutManager){
+                        LinearLayoutManager linearManager = (LinearLayoutManager) layoutManager;
+                        mFirstVisiblePosition = linearManager.findFirstVisibleItemPosition();
+                        mLastVisiblePosition = linearManager.findLastVisibleItemPosition();
+                    }
+                    if(mFirstVisiblePosition == rightVisible){
+                        return;
+                    }else{
+                        leftLinearLayoutManager.scrollToPositionWithOffset(mFirstVisiblePosition, 0);
+                        leftAdapter.setSelect(mFirstVisiblePosition);
+                        leftAdapter.notifyDataSetChanged();
+                        leftSelect = mFirstVisiblePosition;
+                        rightVisible = mFirstVisiblePosition;
+                    }
+                }
+            }
 
-
-
-
-
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy){
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     private void goWebActivity(NavigationListBean.ArticlesBean mainArticleBean){
