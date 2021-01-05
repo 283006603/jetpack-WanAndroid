@@ -48,8 +48,8 @@ public abstract class AppDataBase extends RoomDatabase{
                 super.onOpen(db);
                 Log.d("AppDataBase", "onOpen");
             }
-        }).addMigrations(MIGRATION_1_2).addMigrations(MIGRATION_2_1).
-                addMigrations(MIGRATION_2_3).addMigrations(MIGRATION_3_4).allowMainThreadQueries().build();
+        })/*.addMigrations(MIGRATION_1_2).addMigrations(MIGRATION_2_1).
+                addMigrations(MIGRATION_2_3).addMigrations(MIGRATION_3_4).allowMainThreadQueries()*/.build();
     }
 
     static Migration MIGRATION_1_2 = new Migration(1, 2) {

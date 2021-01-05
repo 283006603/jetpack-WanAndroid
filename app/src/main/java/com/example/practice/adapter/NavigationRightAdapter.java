@@ -17,9 +17,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * Created By 大苏打
  * on 2020/10/23
@@ -33,8 +30,6 @@ public class NavigationRightAdapter extends BaseQuickAdapter<NavigationListBean,
     protected void convert(@NotNull BaseViewHolder holder, NavigationListBean navigationListBean){
         holder.setText(R.id.tv_name, navigationListBean.getName());
         TagFlowLayout tagFlow = holder.getView(R.id.tag_flow_hot);
-
-
         tagFlow.setAdapter(new TagAdapter<NavigationListBean.ArticlesBean>(navigationListBean.getArticles()){
             @Override
             public View getView(FlowLayout parent, int position, NavigationListBean.ArticlesBean articlesBean){
@@ -43,29 +38,22 @@ public class NavigationRightAdapter extends BaseQuickAdapter<NavigationListBean,
                 return textView;
             }
         });
-
         tagFlow.setOnTagClickListener(new TagFlowLayout.OnTagClickListener(){
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent){
-                mtagSelectListener.onTagSelect(holder.getLayoutPosition(),position);
+                mtagSelectListener.onTagSelect(holder.getLayoutPosition(), position);
                 return true;
             }
         });
-
-
-
-
-
-
     }
-
 
     TagSelectListener mtagSelectListener;
+
     public void setOnTagSelectListener(TagSelectListener tagSelectListener){
-        mtagSelectListener=tagSelectListener;
+        mtagSelectListener = tagSelectListener;
     }
 
-   public  interface TagSelectListener {
-        void onTagSelect(int positon,int tagPosition);
+    public interface TagSelectListener{
+        void onTagSelect(int positon, int tagPosition);
     }
 }
