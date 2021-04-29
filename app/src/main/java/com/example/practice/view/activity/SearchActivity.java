@@ -28,6 +28,7 @@ import com.example.practice.bean.PageList;
 import com.example.practice.config.Constants;
 import com.example.practice.database.AppDataBase;
 import com.example.practice.database.dao.HotKeyHistoryDao;
+import com.example.practice.thread.MyThreadPoolExecute;
 import com.example.practice.viewmodel.MainViewModel;
 import com.example.practice.widge.DampScrollView;
 import com.gyf.immersionbar.ImmersionBar;
@@ -43,6 +44,8 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -80,6 +83,7 @@ public class SearchActivity extends BaseActivity{
     private PageList<MainArticleBean> pageList;
     private HotKeyHistoryDao hotKeyHistoryDao;
     private List<HotKeyHistoryBean> hotKeyHistoryBeans;
+    private MyThreadPoolExecute threadPoolExecutor;
 
     @Override
     public boolean useImmersionBar(){
@@ -102,7 +106,13 @@ public class SearchActivity extends BaseActivity{
         adapter = new MainArticleAdapter(R.layout.item_main_article, mainArticleBeanList);
         recycleview.setAdapter(adapter);
         hotKeyHistoryDao = AppDataBase.getInstance().getHotKeyHistoryDao();
+        creatThread();//创建基本线程池
         refreshDataBase();
+    }
+
+    //https://www.jianshu.com/p/7b2da1d94b42
+    private void creatThread(){
+        threadPoolExecutor = new MyThreadPoolExecute(3, 5, 1, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(100));
     }
 
     @Override
@@ -190,38 +200,52 @@ public class SearchActivity extends BaseActivity{
     }
 
     private void inSertDataBase(){
-        hotKeyHistoryBeans = hotKeyHistoryDao.queryList();
-        HotKeyHistoryBean hotKeyHistoryBean = new HotKeyHistoryBean();
-        hotKeyHistoryBean.hot_name_history = k;
-        //去重，若数据库内有搜索记录这个记录变成首位
-        for(int i = 0; i < hotKeyHistoryBeans.size(); i++){
-            if(hotKeyHistoryBeans.get(i).hot_name_history.equals(k)){
-                hotKeyHistoryBeans.remove(hotKeyHistoryBeans.get(i));
-                break;
+        threadPoolExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                hotKeyHistoryBeans = hotKeyHistoryDao.queryList();
+                HotKeyHistoryBean hotKeyHistoryBean = new HotKeyHistoryBean();
+                hotKeyHistoryBean.hot_name_history = k;
+                //去重，若数据库内有搜索记录这个记录变成首位
+                for(int i = 0; i < hotKeyHistoryBeans.size(); i++){
+                    if(hotKeyHistoryBeans.get(i).hot_name_history.equals(k)){
+                        hotKeyHistoryBeans.remove(hotKeyHistoryBeans.get(i));
+                        break;
+                    }
+                }
+                hotKeyHistoryBeans.add(hotKeyHistoryBean);
+                if(hotKeyHistoryBeans.size() > 10){
+                    hotKeyHistoryBeans.remove(0);
+                }
+                //清表了再重新插入新得list
+                hotKeyHistoryDao.deleteData();
+                hotKeyHistoryDao.insertItems(hotKeyHistoryBeans);
             }
-        }
-        hotKeyHistoryBeans.add(hotKeyHistoryBean);
-        if(hotKeyHistoryBeans.size() > 10){
-            hotKeyHistoryBeans.remove(0);
-        }
-        //清表了再重新插入新得list
-        hotKeyHistoryDao.deleteData();
-        hotKeyHistoryDao.insertItems(hotKeyHistoryBeans);
+        });
+
+
     }
 
     private void refreshDataBase(){
-        hotKeyHistoryBeans = hotKeyHistoryDao.queryList();
-        Collections.reverse(hotKeyHistoryBeans);
-        if(hotKeyHistoryBeans != null || hotKeyHistoryBeans.size() != 0){
-            tagFlowHistory.setAdapter(new TagAdapter<HotKeyHistoryBean>(hotKeyHistoryBeans){
-                @Override
-                public View getView(FlowLayout parent, int position, HotKeyHistoryBean hotKeyHistoryBean){
-                    TextView textView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_tag_flow, tagFlowHistory, false);
-                    textView.setText(hotKeyHistoryBean.hot_name_history);
-                    return textView;
+        Runnable runnable = new Runnable(){
+            @Override
+            public void run(){
+                hotKeyHistoryBeans = hotKeyHistoryDao.queryList();
+                Collections.reverse(hotKeyHistoryBeans);
+                if(hotKeyHistoryBeans != null && hotKeyHistoryBeans.size() != 0){
+                    tagFlowHistory.setAdapter(new TagAdapter<HotKeyHistoryBean>(hotKeyHistoryBeans){
+                        @Override
+                        public View getView(FlowLayout parent, int position, HotKeyHistoryBean hotKeyHistoryBean){
+                            TextView textView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_tag_flow, tagFlowHistory, false);
+                            textView.setText(hotKeyHistoryBean.hot_name_history);
+                            return textView;
+                        }
+                    });
                 }
-            });
-        }
+            }
+        };
+
+        threadPoolExecutor.execute(runnable);
     }
 
     @Override

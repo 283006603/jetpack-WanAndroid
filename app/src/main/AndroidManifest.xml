@@ -40,7 +40,7 @@
     
         <provider
             android:name=".provider.ApplicationContextProvider"
-            android:authorities="com.future_education.voicelearn.contextprovider"
+            android:authorities="com.example.practice.contextprovider"
             android:exported="false" />
         
     </application>
