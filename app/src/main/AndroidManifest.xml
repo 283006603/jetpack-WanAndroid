@@ -16,10 +16,7 @@
         <activity android:name=".view.activity.MeiZiActivity" />
         <activity android:name=".view.activity.RegisterActivity" />
         <activity android:name=".view.activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        
         </activity>
         <activity
             android:name=".view.activity.SearchActivity"
@@ -28,7 +25,13 @@
         <activity android:name=".view.activity.WeChatDetailActivity" />
         <activity android:name=".view.activity.SystemDetailActivity" />
         <activity android:name=".view.activity.WebViewActivity" />
-        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.MainActivity">
+    
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         
         <service
             android:name=".service.InitializeService"

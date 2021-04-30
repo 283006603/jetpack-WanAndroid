@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/str_blog_address"
         android:textSize="@dimen/sp_18"
-        android:textColor="@color/color_475b80"
+        android:autoLink="all"
         />
     
     <TextView
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="@string/str_github_address"
         android:textSize="@dimen/sp_18"
-        android:textColor="@color/color_475b80"
+        android:autoLink="all"
         />
 
 </LinearLayout>

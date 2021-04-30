@@ -8,8 +8,14 @@
     >
     <!-- TODO: Update blank fragment layout -->
     
+    <com.example.practice.widge.QQHeaderSrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/sv_scroll"
+        android:divider="@null"
+        />
     
-    <com.example.practice.widge.ZoomScrollView
+   <!-- <com.example.practice.widge.ZoomScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#fff5f5f5"
@@ -43,7 +49,7 @@
                     android:layout_height="80dp"
                     android:layout_alignParentBottom="true"
                     android:background="@android:color/white"
-                    ></LinearLayout>
+                    />
                 
                 
                 <View
@@ -146,7 +152,7 @@
     
     
     </com.example.practice.widge.ZoomScrollView>
-    
+    -->
     
    
 
