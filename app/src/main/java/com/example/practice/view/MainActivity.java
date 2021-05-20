@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.practice.R;
 import com.example.practice.base.BaseActivity;
+import com.example.practice.databinding.ActivityMainBinding;
 import com.example.practice.view.fragment.MainFragment;
 import com.example.practice.view.fragment.MineFragment;
 import com.example.practice.view.fragment.ProjectFragment;
@@ -19,21 +20,14 @@ import java.util.List;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import butterknife.BindView;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity<ActivityMainBinding>{
 
-    @BindView(R.id.main_vb1)
     RadioButton mainVb1;
-    @BindView(R.id.main_vb2)
     RadioButton mainVb2;
-    @BindView(R.id.main_vb3)
     RadioButton mainVb3;
-    @BindView(R.id.main_vb4)
     RadioButton mainVb4;
-    @BindView(R.id.main_vg)
     RadioGroup mainVg;
-    @BindView(R.id.fl_main_container)
     FrameLayout mainFramelayout;
 
     List<Fragment> fragments = new ArrayList<>();
@@ -66,6 +60,13 @@ public class MainActivity extends BaseActivity{
     @Override
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
+        mainVb1 = binding.mainVb1;
+        mainVb2 = binding.mainVb2;
+        mainVb3 = binding.mainVb3;
+        mainVb4 = binding.mainVb4;
+        mainVg=binding.mainVg;
+        mainFramelayout=binding.flMainContainer;
+
         fragmentManager = getSupportFragmentManager();
         createFragment();
         selectFragment(0);
@@ -104,11 +105,6 @@ public class MainActivity extends BaseActivity{
     }
 
     @Override
-    public int getLayoutId(){
-        return R.layout.activity_main;
-    }
-
-    @Override
     public void getRemoteData(){
     }
 
@@ -128,12 +124,8 @@ public class MainActivity extends BaseActivity{
         }
     }
 
-
     @Override
-    public boolean useImmersionBar() {
+    public boolean useImmersionBar(){
         return true;
     }
-
-
-
 }

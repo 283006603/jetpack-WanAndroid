@@ -11,25 +11,17 @@ import com.example.practice.R;
 import com.example.practice.base.BaseActivity;
 import com.example.practice.bean.LoginBean;
 import com.example.practice.config.Constants;
+import com.example.practice.databinding.ActivityRegisterBinding;
 import com.example.practice.utils.SharePrefUtil;
 import com.example.practice.view.MainActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.wljy.mvvmlibrary.annotation.Event;
 
-import butterknife.BindView;
+public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> implements View.OnClickListener{
 
-public class RegisterActivity extends BaseActivity implements View.OnClickListener{
-
-    @BindView(R.id.edit_register_account)
     EditText edit_register_account;
-
-    @BindView(R.id.edit_register_pwd)
     EditText edit_register_pwd;
-
-    @BindView(R.id.edit_register_pwd_again)
     EditText edit_register_pwd_again;
-
-    @BindView(R.id.bt_confirm)
     Button bt_confirm;
 
     String account, pwd, pwd_again;
@@ -43,6 +35,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
+         edit_register_account=binding.editRegisterAccount;
+         edit_register_pwd=binding.editRegisterPwd;
+         edit_register_pwd_again=binding.editRegisterPwdAgain;
+         bt_confirm=binding.btConfirm;
+
         bt_confirm.setOnClickListener(this);
     }
 
@@ -50,10 +47,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     protected void initListener(){
     }
 
-    @Override
-    public int getLayoutId(){
-        return R.layout.activity_register;
-    }
+
 
     @Override
     public void getRemoteData(){

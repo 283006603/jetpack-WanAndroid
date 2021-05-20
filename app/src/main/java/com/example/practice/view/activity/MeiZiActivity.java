@@ -13,6 +13,7 @@ import com.example.practice.base.BaseActivity;
 import com.example.practice.bean.GankLzyBaseResponse;
 import com.example.practice.bean.GankMeiziBean;
 import com.example.practice.config.Constants;
+import com.example.practice.databinding.ActivityMeiZiBinding;
 import com.example.practice.viewmodel.MainViewModel;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -26,13 +27,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
-public class MeiZiActivity extends BaseActivity{
+public class MeiZiActivity extends BaseActivity<ActivityMeiZiBinding>{
 
-    @BindView(R.id.recycleview)
     RecyclerView recyclerView;
-    @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
     private MainViewModel mainViewModel;
 
@@ -51,6 +49,8 @@ public class MeiZiActivity extends BaseActivity{
     @Override
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
+        recyclerView = binding.recycleview;
+        refreshLayout = binding.refreshLayout;
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new GankMeiziAdapter(R.layout.item_meizi, list);
         recyclerView.setAdapter(adapter);
@@ -86,10 +86,7 @@ public class MeiZiActivity extends BaseActivity{
         });
     }
 
-    @Override
-    public int getLayoutId(){
-        return R.layout.activity_mei_zi;
-    }
+
 
     @Override
     public void getRemoteData(){

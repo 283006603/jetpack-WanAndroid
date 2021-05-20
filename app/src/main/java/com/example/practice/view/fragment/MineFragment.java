@@ -1,6 +1,7 @@
 package com.example.practice.view.fragment;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.practice.R;
 import com.example.practice.adapter.MineAdapter;
 import com.example.practice.base.BaseFragment;
+import com.example.practice.databinding.FragmentMineBinding;
 import com.example.practice.utils.CacheToolsUtil;
 import com.example.practice.utils.FullPopupwindow;
 import com.example.practice.view.activity.MeiZiActivity;
@@ -24,14 +26,12 @@ import java.util.Map;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class MineFragment extends BaseFragment{
-    @BindView(R.id.sv_scroll)
+public class MineFragment extends BaseFragment<FragmentMineBinding>{
     QQHeaderSrollView qqHeaderSrollView;
 
     FullPopupwindow popupWindow;
@@ -46,14 +46,13 @@ public class MineFragment extends BaseFragment{
     public void initViewModel(){
     }
 
-    @Override
-    public int getLayoutResId(){
-        return R.layout.fragment_mine;
-    }
+
 
     @Override
-    public void initView(View rootView){
-        super.initView(rootView);
+    public void initView(Bundle bundle){
+        super.initView(bundle);
+        qqHeaderSrollView=binding.svScroll;
+
         initData();
         mineAdapter = new MineAdapter(list, getActivity(),R.layout.item_mine);
         //获取到头部的View
@@ -66,7 +65,6 @@ public class MineFragment extends BaseFragment{
         qqHeaderSrollView.addHeaderView(header);
         //设置适配器
         qqHeaderSrollView.setAdapter(mineAdapter);
-        initListener();
     }
 
     private void initData(){
@@ -92,7 +90,9 @@ public class MineFragment extends BaseFragment{
         list.add(map5);
     }
 
-    private void initListener(){
+    @Override
+    public void initListener(){
+        super.initListener();
         qqHeaderSrollView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){

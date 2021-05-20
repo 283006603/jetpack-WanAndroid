@@ -8,7 +8,7 @@
     android:orientation="vertical"
     >
     
-    <include layout="@layout/layout_toolbar"/>
+    <include layout="@layout/layout_toolbar" android:id="@+id/toolbar"/>
     
     <com.example.practice.widge.ProgressWebView
         android:layout_width="match_parent"

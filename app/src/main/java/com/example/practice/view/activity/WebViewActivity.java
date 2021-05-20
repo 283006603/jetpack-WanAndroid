@@ -8,20 +8,17 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
-import com.example.practice.R;
 import com.example.practice.base.BaseActivity;
 import com.example.practice.config.Constants;
+import com.example.practice.databinding.ActivityWebViewBinding;
 import com.example.practice.widge.ProgressWebView;
 import com.gyf.immersionbar.ImmersionBar;
 
 import androidx.appcompat.widget.Toolbar;
-import butterknife.BindView;
 
-public class WebViewActivity extends BaseActivity{
+public class WebViewActivity extends BaseActivity<ActivityWebViewBinding>{
 
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.wv_web)
     ProgressWebView wvWeb;
     private String author;
     private int id;
@@ -42,6 +39,8 @@ public class WebViewActivity extends BaseActivity{
     @Override
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
+        toolbar = binding.toolbar.toolbar;
+        wvWeb = binding.wvWeb;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getInitData();
@@ -49,7 +48,7 @@ public class WebViewActivity extends BaseActivity{
 
     private void getInitData(){
         Bundle extras = getIntent().getExtras();
-        if(extras!=null){
+        if(extras != null){
             author = extras.getString(Constants.AUTHOR);
             id = extras.getInt(Constants.ID, -1);
             url = extras.getString(Constants.URL);
@@ -60,13 +59,12 @@ public class WebViewActivity extends BaseActivity{
 
     @Override
     protected void initListener(){
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 handleWebViewBack();
             }
         });
-
         wvWeb.setWebViewCallback(new ProgressWebView.WebViewCallback(){
             @Override
             public void onProgressChanged(WebView view, int newProgress){
@@ -109,11 +107,6 @@ public class WebViewActivity extends BaseActivity{
     }
 
     @Override
-    public int getLayoutId(){
-        return R.layout.activity_web_view;
-    }
-
-    @Override
     public void getRemoteData(){
     }
 
@@ -121,10 +114,10 @@ public class WebViewActivity extends BaseActivity{
     public void initViewModel(){
     }
 
-    private void handleWebViewBack() {
-        if (wvWeb.canGoBack()) {
+    private void handleWebViewBack(){
+        if(wvWeb.canGoBack()){
             wvWeb.goBack();
-        } else {
+        }else{
             finish();
         }
     }
@@ -133,6 +126,6 @@ public class WebViewActivity extends BaseActivity{
     protected void onDestroy(){
         super.onDestroy();
         wvWeb.removeAllViews();
-        wvWeb=null;
+        wvWeb = null;
     }
 }

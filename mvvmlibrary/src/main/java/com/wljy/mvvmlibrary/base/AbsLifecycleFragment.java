@@ -28,7 +28,7 @@ public abstract class AbsLifecycleFragment extends RxFragment {
 
     }
 
-    public void initView(View rootView){
+    public void initView(Bundle state){
         initViewModel();
     }
 
@@ -55,17 +55,21 @@ public abstract class AbsLifecycleFragment extends RxFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(getLayoutResId(), null, false);
-        initButterKnife(rootView);
-        View contentLayout = rootView.findViewById(getContentResId());
-        initView(rootView);
+//        rootView = inflater.inflate(getLayoutResId(), null, false);
+        rootView = provideRootView(inflater, container);
+        /*initButterKnife(rootView);*/
+        initView(savedInstanceState);
+        initListener();
         return rootView;
     }
     private void initButterKnife(View view) {
         ButterKnife.bind(this, view);
     }
 
-    public abstract int getLayoutResId();
+    public void initListener() {
+    }
+
+    public abstract View provideRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container);
 
 
 

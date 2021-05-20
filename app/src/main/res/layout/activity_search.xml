@@ -8,7 +8,7 @@
     android:orientation="vertical"
     >
     
-    <include layout="@layout/item_search_edit"/>
+    <include layout="@layout/item_search_edit" android:id="@+id/search_detail"/>
     
     
     

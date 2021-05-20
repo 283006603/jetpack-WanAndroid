@@ -11,6 +11,7 @@ import com.example.practice.adapter.SystemRightAdapter;
 import com.example.practice.base.BaseFragment;
 import com.example.practice.bean.SystemListBean;
 import com.example.practice.config.Constants;
+import com.example.practice.databinding.FragmentSystemBinding;
 import com.example.practice.view.activity.SystemDetailActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.wljy.mvvmlibrary.annotation.Event;
@@ -23,18 +24,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SystemFragment#} factory method to
  * create an instance of this fragment.仿拼多多或扑扑的分类栏
  */
-public class SystemFragment extends BaseFragment{
+public class SystemFragment extends BaseFragment<FragmentSystemBinding>{
 
-    @BindView(R.id.left_recycleview)
     RecyclerView leftRecycleview;
-    @BindView(R.id.right_recycleview)
     RecyclerView rightRecycleview;
 
     private MainViewModel mainViewModel;
@@ -50,14 +48,14 @@ public class SystemFragment extends BaseFragment{
         mainViewModel = registerViewModel(MainViewModel.class);
     }
 
-    @Override
-    public int getLayoutResId(){
-        return R.layout.fragment_system;
-    }
+
 
     @Override
-    public void initView(View rootView){
-        super.initView(rootView);
+    public void initView(Bundle bundle){
+        super.initView(bundle);
+         leftRecycleview=binding.leftRecycleview;
+         rightRecycleview=binding.rightRecycleview;
+
         leftRecycleview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         leftAdapter = new SystemLeftAdapter(R.layout.item_system_left, leftList);
         //        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
@@ -69,10 +67,11 @@ public class SystemFragment extends BaseFragment{
         rightRecycleview.setLayoutManager(new GridLayoutManager(getContext(), 2));
         rightAdapter = new SystemRightAdapter(R.layout.item_system_right, rightList);
         rightRecycleview.setAdapter(rightAdapter);
-        initListener();
     }
 
-    private void initListener(){
+    @Override
+    public void initListener(){
+        super.initListener();
         leftAdapter.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){
@@ -93,8 +92,6 @@ public class SystemFragment extends BaseFragment{
                 goSystemDetailActivity(rightList.get(position));
             }
         });
-
-
     }
 
     private void goSystemDetailActivity(SystemListBean.ChildrenBean childrenBean){

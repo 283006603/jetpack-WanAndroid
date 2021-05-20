@@ -7,7 +7,7 @@
     android:orientation="vertical"
     >
     <!-- TODO: Update blank fragment layout -->
-    <include layout="@layout/item_search_show" />
+    <include layout="@layout/item_search_show" android:id="@+id/itemsearch" />
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

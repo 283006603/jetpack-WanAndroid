@@ -11,6 +11,7 @@ import com.example.practice.base.BaseFragment;
 import com.example.practice.bean.MainArticleBean;
 import com.example.practice.bean.PageList;
 import com.example.practice.config.Constants;
+import com.example.practice.databinding.FragmentProjectPageBinding;
 import com.example.practice.view.activity.WebViewActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -26,19 +27,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProjectPageFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProjectPageFragment extends BaseFragment{
+public class ProjectPageFragment extends BaseFragment<FragmentProjectPageBinding>{
 
     public int id;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
     private MainViewModel mainViewModel;
     int page=1;
@@ -67,18 +65,22 @@ public class ProjectPageFragment extends BaseFragment{
     }
 
     @Override
-    public void initView(View rootView){
-        super.initView(rootView);
+    public void initView(Bundle bundle){
+        super.initView(bundle);
+         recycleview=binding.recycleview;
+         refreshLayout=binding.refreshLayout;
+
         if(getArguments() != null){
             id = getArguments().getInt(Constants.ID);
         }
         recycleview.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         adapter = new ProjectPageFragmentAdapter(R.layout.item_project,mainArticleBeanList);
         recycleview.setAdapter(adapter);
-        initListener();
     }
 
-    private void initListener(){
+    @Override
+    public void initListener(){
+        super.initListener();
         //下拉刷新
         refreshLayout.setOnRefreshListener(new OnRefreshListener(){
             @Override
@@ -112,10 +114,6 @@ public class ProjectPageFragment extends BaseFragment{
         activity(WebViewActivity.class, bundle);
     }
 
-    @Override
-    public int getLayoutResId(){
-        return R.layout.fragment_project_page;
-    }
 
     @Override
     public void getRemoteData(){

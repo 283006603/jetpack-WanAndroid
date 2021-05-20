@@ -13,6 +13,7 @@ import com.example.practice.R;
 import com.example.practice.adapter.ImagePreviewAdapter;
 import com.example.practice.base.BaseActivity;
 import com.example.practice.bean.GankMeiziBean;
+import com.example.practice.databinding.ActivityMeiZiDetailBinding;
 import com.example.practice.utils.AppUtil;
 
 import java.io.BufferedInputStream;
@@ -26,15 +27,11 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
-public class MeiZiDetailActivity extends BaseActivity{
+public class MeiZiDetailActivity extends BaseActivity<ActivityMeiZiDetailBinding>{
 
-    @BindView(R.id.rv_image_preview)
     RecyclerView recyclerView;
-    @BindView(R.id.tv_image_preview_count)
     TextView countTxtView;
-    @BindView(R.id.tv_image_save)
     TextView saveTxtview;
 
     private ArrayList<GankMeiziBean> dataList = new ArrayList<>();
@@ -51,6 +48,10 @@ public class MeiZiDetailActivity extends BaseActivity{
     @Override
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
+         recyclerView=binding.rvImagePreview;
+         countTxtView=binding.tvImagePreviewCount;
+         saveTxtview=binding.tvImageSave;
+
         getIntentData();
         layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
@@ -101,10 +102,7 @@ public class MeiZiDetailActivity extends BaseActivity{
         });
     }
 
-    @Override
-    public int getLayoutId(){
-        return R.layout.activity_mei_zi_detail;
-    }
+
 
     @Override
     public void getRemoteData(){

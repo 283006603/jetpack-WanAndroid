@@ -11,25 +11,20 @@ import com.example.practice.R;
 import com.example.practice.base.BaseActivity;
 import com.example.practice.bean.LoginBean;
 import com.example.practice.config.Constants;
+import com.example.practice.databinding.ActivityLoginBinding;
 import com.example.practice.utils.SharePrefUtil;
 import com.example.practice.view.MainActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.wljy.mvvmlibrary.annotation.Event;
 
-import butterknife.BindView;
+public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener{
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener{
-
-    @BindView(R.id.edit_login_account)
     EditText edit_login_account;
 
-    @BindView(R.id.edit_login_pwd)
     EditText edit_login_pwd;
 
-    @BindView(R.id.bt_register)
     Button bt_register;
 
-    @BindView(R.id.bt_login_confirm)
     Button bt_login_confirm;
     private String str_account;
     private String str_pwd;
@@ -44,7 +39,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     @Override
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
-        loginActivity=this;
+        edit_login_account = binding.editLoginAccount;
+        edit_login_pwd = binding.editLoginPwd;
+        bt_register = binding.btRegister;
+        bt_login_confirm = binding.btLoginConfirm;
+        loginActivity = this;
         bt_login_confirm.setOnClickListener(this);
         bt_register.setOnClickListener(this);
         autoLogin();
@@ -53,19 +52,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private void autoLogin(){
         boolean isLogin = SharePrefUtil.getBoolean(this, Constants.ISLOGIN, false);
         if(isLogin){
-            edit_login_account.setText(SharePrefUtil.getString(this,Constants.ACCOUNT,""));
-            edit_login_pwd.setText(SharePrefUtil.getString(this,Constants.PASSWORD,""));
+            edit_login_account.setText(SharePrefUtil.getString(this, Constants.ACCOUNT, ""));
+            edit_login_pwd.setText(SharePrefUtil.getString(this, Constants.PASSWORD, ""));
             bt_login_confirm.performClick();
         }
     }
 
     @Override
     protected void initListener(){
-    }
-
-    @Override
-    public int getLayoutId(){
-        return R.layout.activity_login;
     }
 
     @Override
@@ -95,7 +89,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     public void onEvent(String key, Object value){
         if(key.equals(Constants.GET_LOGIN_RESULT)){
             Log.d("TAG", "aaa");
-            LoginBean loginBean= (LoginBean) value;
+            LoginBean loginBean = (LoginBean) value;
             SharePrefUtil.saveInt(this, Constants.USERID, loginBean.getId());
             SharePrefUtil.saveBoolean(this, Constants.ISLOGIN, true);
             SharePrefUtil.saveString(this, Constants.ACCOUNT, str_account);

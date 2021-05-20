@@ -69,12 +69,6 @@ android {
             versionCode RTM_VERSION_CODE
             versionName RTM_VERSION_NAME
         }
-//        uat {
-//            buildConfigField "String", "ENVIRONMENT", '"uat"'
-//            versionCode RTM_VERSION_CODE
-//            versionName RTM_VERSION_NAME
-//        }
-
         applicationVariants.all {
             variant ->
                 variant.outputs.all {
@@ -83,6 +77,9 @@ android {
         }
     }
 
+    viewBinding {
+        enabled = true
+    }
 
 
     buildTypes {
@@ -145,9 +142,9 @@ dependencies {
     implementation 'com.ljx.rxhttp:converter-fastjson:2.4.0'
     //动态申请库
     implementation 'pub.devrel:easypermissions:3.0.0'
-    //id注解库
+    /*//id注解库废弃
     implementation 'com.jakewharton:butterknife:10.2.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'*/
     //解决65535问题
     implementation 'androidx.multidex:multidex:2.0.1'
     //v4适应包
@@ -158,7 +155,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     //上下拉刷新框
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'//核心必须依赖
-    implementation  'com.scwang.smart:refresh-header-classics:2.0.1'//经典刷新头
+    implementation 'com.scwang.smart:refresh-header-classics:2.0.1'//经典刷新头
     implementation 'com.scwang.smart:refresh-footer-ball:2.0.1'//球脉冲加载
     //Room数据库
     def room_version = "2.2.5"

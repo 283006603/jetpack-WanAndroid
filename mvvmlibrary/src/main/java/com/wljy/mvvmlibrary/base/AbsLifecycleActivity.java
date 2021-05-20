@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 import com.wljy.mvvmlibrary.R;
@@ -35,7 +36,11 @@ public abstract class AbsLifecycleActivity extends RxAppCompatActivity {
         super.onCreate(savedInstanceState);
         CONTEXT_BASE = this;
         //设置布局内容
-        setContentView(getLayoutId());
+        /*setContentView(getLayoutId());*/
+        View view = provideRootView();
+        if (view != null) {
+            setContentView(view);
+        }
         //状态栏
         initStatusBar();
         //初始化ButterKnife
@@ -72,9 +77,10 @@ public abstract class AbsLifecycleActivity extends RxAppCompatActivity {
 
     /**
      * 设置布局layout
-     */
-    public abstract int getLayoutId();
-
+     *//*
+    public abstract int getLayoutId();*/
+    protected abstract @Nullable
+    View provideRootView();
 
     /**
      * 初始化toolbar

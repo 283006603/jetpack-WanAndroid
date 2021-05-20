@@ -5,9 +5,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.example.practice.R;
 import com.example.practice.adapter.SystemNavigationAdapter;
 import com.example.practice.base.BaseFragment;
+import com.example.practice.databinding.FragmentSystemNavigationBinding;
 import com.example.practice.view.activity.SearchActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.google.android.material.tabs.TabLayout;
@@ -17,24 +17,20 @@ import java.util.List;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SystemNavigationFragment#} factory method to
  * create an instance of this fragment.仿拼多多或扑扑的分类栏
  */
-public class SystemNavigationFragment extends BaseFragment{
+public class SystemNavigationFragment extends BaseFragment<FragmentSystemNavigationBinding>{
 
-    @BindView(R.id.rela_search)
     RelativeLayout relaSearch;
-    @BindView(R.id.table_layout)
     TabLayout tableLayout;
-    @BindView(R.id.view_pager)
     ViewPager viewPager;
     private MainViewModel mainViewModel;
-    private List<Fragment>list;
-    private String [] title={"体系","导航"};
+    private List<Fragment> list;
+    private String[] title = {"体系", "导航"};
 
     @Override
     public void initViewModel(){
@@ -42,28 +38,25 @@ public class SystemNavigationFragment extends BaseFragment{
     }
 
     @Override
-    public int getLayoutResId(){
-        return R.layout.fragment_system_navigation;
-    }
-
-    @Override
-    public void initView(View rootView){
-        super.initView(rootView);
+    public void initView(Bundle bundle){
+        super.initView(bundle);
+        relaSearch = binding.itemsearch.relaSearch;
+        tableLayout = binding.tableLayout;
+        viewPager = binding.viewPager;
         initFragment();
-        initListener();
     }
 
     private void initFragment(){
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         list.add(new SystemFragment());
         list.add(new NavigationFragment());
-        SystemNavigationAdapter adapter=new SystemNavigationAdapter(getChildFragmentManager(),list,title);
+        SystemNavigationAdapter adapter = new SystemNavigationAdapter(getChildFragmentManager(), list, title);
         viewPager.setAdapter(adapter);
         tableLayout.setupWithViewPager(viewPager);
-
     }
 
-    private void initListener(){
+    @Override
+    public void initListener(){
         relaSearch.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -74,13 +67,7 @@ public class SystemNavigationFragment extends BaseFragment{
                 activity(SearchActivity.class, bundle);
             }
         });
-
-
-
-
     }
-
-
 
     @Override
     public void getRemoteData(){

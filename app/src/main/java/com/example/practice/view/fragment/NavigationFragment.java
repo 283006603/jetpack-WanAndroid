@@ -12,6 +12,7 @@ import com.example.practice.adapter.NavigationRightAdapter;
 import com.example.practice.base.BaseFragment;
 import com.example.practice.bean.NavigationListBean;
 import com.example.practice.config.Constants;
+import com.example.practice.databinding.FragmentNavigationBinding;
 import com.example.practice.view.activity.WebViewActivity;
 import com.example.practice.viewmodel.MainViewModel;
 import com.wljy.mvvmlibrary.annotation.Event;
@@ -23,7 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
 import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
 import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_DRAGGING;
@@ -32,11 +32,9 @@ import static androidx.viewpager.widget.ViewPager.SCROLL_STATE_DRAGGING;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class NavigationFragment extends BaseFragment{
+public class NavigationFragment extends BaseFragment<FragmentNavigationBinding>{
 
-    @BindView(R.id.left_recycleview)
     RecyclerView leftRecycleview;
-    @BindView(R.id.right_recycleview)
     RecyclerView rightRecycleview;
     private MainViewModel viewModel;
     List<NavigationListBean> list = new ArrayList<>();
@@ -53,14 +51,14 @@ public class NavigationFragment extends BaseFragment{
         viewModel = registerViewModel(MainViewModel.class);
     }
 
-    @Override
-    public int getLayoutResId(){
-        return R.layout.fragment_navigation;
-    }
+
 
     @Override
-    public void initView(View rootView){
-        super.initView(rootView);
+    public void initView(Bundle bundle){
+        super.initView(bundle);
+         leftRecycleview=binding.leftRecycleview;
+         rightRecycleview=binding.rightRecycleview;
+
         leftLinearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         leftRecycleview.setLayoutManager(leftLinearLayoutManager);
         leftAdapter = new NavigationLeftAdapter(R.layout.item_system_left, list);
@@ -71,10 +69,11 @@ public class NavigationFragment extends BaseFragment{
         rightRecycleview.setLayoutManager(rightLinearLayoutManager);
         rightAdapter = new NavigationRightAdapter(R.layout.item_navigation_right, list);
         rightRecycleview.setAdapter(rightAdapter);
-        initListener();
     }
 
-    private void initListener(){
+    @Override
+    public void initListener(){
+        super.initListener();
         leftAdapter.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){

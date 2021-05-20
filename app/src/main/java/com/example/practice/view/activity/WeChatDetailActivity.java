@@ -11,6 +11,7 @@ import com.example.practice.base.BaseActivity;
 import com.example.practice.bean.MainArticleBean;
 import com.example.practice.bean.PageList;
 import com.example.practice.config.Constants;
+import com.example.practice.databinding.ActivityWeChatDetailBinding;
 import com.example.practice.viewmodel.MainViewModel;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -26,21 +27,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 
-public class WeChatDetailActivity extends BaseActivity{
+public class WeChatDetailActivity extends BaseActivity<ActivityWeChatDetailBinding>{
 
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
     private MainViewModel mainViewModel;
     private int id;
-    List<MainArticleBean>mainArticleBeanList=new ArrayList<>();
+    List<MainArticleBean> mainArticleBeanList = new ArrayList<>();
     private MainArticleAdapter adapter;
-    private int page=0;
+    private int page = 0;
     private PageList<MainArticleBean> pageList;
     private String name;
 
@@ -57,9 +54,12 @@ public class WeChatDetailActivity extends BaseActivity{
     @Override
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
+        toolbar = binding.toolbar.toolbar;
+        recycleview = binding.recycleview;
+        refreshLayout = binding.refreshLayout;
         getInitData();
-        recycleview.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
-        adapter = new MainArticleAdapter(R.layout.item_main_article,mainArticleBeanList);
+        recycleview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        adapter = new MainArticleAdapter(R.layout.item_main_article, mainArticleBeanList);
         recycleview.setAdapter(adapter);
     }
 
@@ -76,13 +76,12 @@ public class WeChatDetailActivity extends BaseActivity{
 
     @Override
     protected void initListener(){
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 finish();
             }
         });
-
         //下拉刷新
         refreshLayout.setOnRefreshListener(new OnRefreshListener(){
             @Override
@@ -98,7 +97,6 @@ public class WeChatDetailActivity extends BaseActivity{
                 mainViewModel.getMainArticle(++page);
             }
         });
-
         adapter.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position){
@@ -117,13 +115,8 @@ public class WeChatDetailActivity extends BaseActivity{
     }
 
     @Override
-    public int getLayoutId(){
-        return R.layout.activity_we_chat_detail;
-    }
-
-    @Override
     public void getRemoteData(){
-        mainViewModel.getWeChatDetail(id,page);
+        mainViewModel.getWeChatDetail(id, page);
     }
 
     @Override
@@ -171,5 +164,4 @@ public class WeChatDetailActivity extends BaseActivity{
             //显示网络错误视图
         }
     }
-
 }

@@ -28,6 +28,7 @@ import com.example.practice.bean.PageList;
 import com.example.practice.config.Constants;
 import com.example.practice.database.AppDataBase;
 import com.example.practice.database.dao.HotKeyHistoryDao;
+import com.example.practice.databinding.ActivitySearchBinding;
 import com.example.practice.thread.MyThreadPoolExecute;
 import com.example.practice.viewmodel.MainViewModel;
 import com.example.practice.widge.DampScrollView;
@@ -50,28 +51,19 @@ import java.util.concurrent.TimeUnit;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class SearchActivity extends BaseActivity{
+public class SearchActivity extends BaseActivity<ActivitySearchBinding>{
 
-    @BindView(R.id.search_cancel)
     TextView searchCancel;
-    @BindView(R.id.edit_search)
     EditText editSearch;
-    @BindView(R.id.tag_flow_hot)
     TagFlowLayout tagFlowHot;
 
-    public String k;
-    @BindView(R.id.recycleview)
     RecyclerView recycleview;
-    @BindView(R.id.scrollView)
     DampScrollView scrollView;
-    @BindView(R.id.refresh_layout)
     SmartRefreshLayout refreshLayout;
-    @BindView(R.id.tag_flow_history)
     TagFlowLayout tagFlowHistory;
 
+    public String k;
     private MainViewModel mainViewModel;
     //    private int page = 0;//搜索作者文章page从0开始
     //    private String author;
@@ -100,6 +92,14 @@ public class SearchActivity extends BaseActivity{
     @Override
     public void initViews(Bundle savedInstanceState){
         super.initViews(savedInstanceState);
+        searchCancel = binding.searchDetail.searchCancel;
+        editSearch = binding.searchDetail.editSearch;
+        tagFlowHot = binding.tagFlowHot;
+        recycleview = binding.recycleview;
+        scrollView = binding.scrollView;
+        refreshLayout = binding.refreshLayout;
+        tagFlowHistory = binding.tagFlowHistory
+        ;
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         showSoftInputFromWindow(SearchActivity.this, editSearch);
         recycleview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
@@ -222,8 +222,6 @@ public class SearchActivity extends BaseActivity{
                 hotKeyHistoryDao.insertItems(hotKeyHistoryBeans);
             }
         });
-
-
     }
 
     private void refreshDataBase(){
@@ -244,14 +242,9 @@ public class SearchActivity extends BaseActivity{
                 }
             }
         };
-
         threadPoolExecutor.execute(runnable);
     }
 
-    @Override
-    public int getLayoutId(){
-        return R.layout.activity_search;
-    }
 
     @Override
     public void getRemoteData(){
@@ -362,10 +355,5 @@ public class SearchActivity extends BaseActivity{
         activity(WebViewActivity.class, bundle);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }
