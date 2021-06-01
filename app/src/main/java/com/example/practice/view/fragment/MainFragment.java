@@ -1,16 +1,17 @@
 package com.example.practice.view.fragment;
 
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.example.practice.R;
 import com.example.practice.adapter.ImageBannerAdapter;
 import com.example.practice.adapter.MainArticleAdapter;
+import com.example.practice.adapter.MyGridViewAdpter;
+import com.example.practice.adapter.MyViewPagerAdapter;
 import com.example.practice.base.BaseFragment;
 import com.example.practice.bean.BannerBean;
 import com.example.practice.bean.MainArticleBean;
@@ -21,16 +22,16 @@ import com.example.practice.databinding.FragmentMainBinding;
 import com.example.practice.view.activity.WeChatDetailActivity;
 import com.example.practice.view.activity.WebViewActivity;
 import com.example.practice.viewmodel.MainViewModel;
-import com.example.practice.widge.gridviewpager.GridRecyclerAdapter;
-import com.example.practice.widge.gridviewpager.GridViewPager;
-import com.example.practice.widge.gridviewpager.GridViewPagerAdapter;
+import com.example.practice.widge.GridViewPager;
+import com.example.practice.widge.MyGridView;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.wljy.mvvmlibrary.annotation.Event;
 import com.youth.banner.Banner;
-import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.config.IndicatorConfig;
+import com.youth.banner.indicator.RectangleIndicator;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
@@ -59,27 +60,34 @@ public class MainFragment extends BaseFragment<FragmentMainBinding>{
     private PageList<MainArticleBean> pageList;
     private Banner mainBanner;
     private ImageBannerAdapter imageAdapter;
-    private GridViewPager gridViewPager;
-    private int[] colors = {0xffec407a, 0xffab47bc, 0xff29b6f6, 0xff7e57c2, 0xffe24073, 0xffee8360, 0xff26a69a, 0xffef5350, 0xff2baf2b, 0xffffa726};
+    private GridViewPager viewpager;
+
+    private int totalPage; //总的页数
+    private int mPageSize = 10; //每页显示的最大的数量
+    private List<View> viewPagerList;//GridView作为一个View对象添加到ViewPager集合中
 
     @Override
     public void initView(Bundle bundle){
         super.initView(bundle);
-         mainRecycleview=binding.mainRecycleview;
-         refreshLayout=binding.refreshLayout;
-
+        mainRecycleview = binding.mainRecycleview;
+        refreshLayout = binding.refreshLayout;
         mainRecycleview.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         adapter = new MainArticleAdapter(R.layout.item_main_article, mainArticleBeanList);
+        mainRecycleview.setAdapter(adapter);
+        //---
         headView = LayoutInflater.from(getContext()).inflate(R.layout.item_main_header, null);
         mainBanner = headView.findViewById(R.id.main_banner);
-        mainRecycleview.setAdapter(adapter);
+        viewpager = headView.findViewById(R.id.view_pager);
+        //---
         imageAdapter = new ImageBannerAdapter(bannerBeanList, getContext());
-        mainBanner.setIndicator(new CircleIndicator(getContext()));
-        //        mainBanner.setBannerGalleryEffect(150, 20); //添加画廊效果
+        mainBanner.setCurrentItem(1);
+        mainBanner.setIndicator(new RectangleIndicator(getContext()));
+        mainBanner.setIndicatorGravity(IndicatorConfig.Direction.RIGHT);
+        mainBanner.setIndicatorMargins(new IndicatorConfig.Margins(0,0,100,50));
+        //mainBanner.setBannerGalleryEffect(150, 20); //添加画廊效果
         mainBanner.setAdapter(imageAdapter).addBannerLifecycleObserver(this);
+        //=====
         adapter.addHeaderView(headView);
-        //=====添加公众号
-        gridViewPager = headView.findViewById(R.id.viewpager);
     }
 
     @Override
@@ -113,13 +121,6 @@ public class MainFragment extends BaseFragment<FragmentMainBinding>{
                 goWebActivityForBanner(bannerBeanList.get(position));
             }
         });
-        //公众号点击事件
-        gridViewPager.setOnGridItemClickListener(new GridViewPager.OnGridItemClickListener(){
-            @Override
-            public void onGridItemClick(int position, View view){
-                goWeChatDetailActivity(weChatArticleList.get(position));
-            }
-        });
     }
 
     private void goWebActivityForBanner(BannerBean bannerBean){
@@ -132,10 +133,10 @@ public class MainFragment extends BaseFragment<FragmentMainBinding>{
     }
 
     private void goWeChatDetailActivity(WeChatArticle weChatArticle){
-        Bundle bundle=new Bundle();
-        bundle.putInt(Constants.ID,weChatArticle.getId());
-        bundle.putString(Constants.TITILE,weChatArticle.getName());
-        activity(WeChatDetailActivity.class,bundle);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.ID, weChatArticle.getId());
+        bundle.putString(Constants.TITILE, weChatArticle.getName());
+        activity(WeChatDetailActivity.class, bundle);
     }
 
     private void goWebActivity(MainArticleBean mainArticleBean){
@@ -151,8 +152,6 @@ public class MainFragment extends BaseFragment<FragmentMainBinding>{
     public void initViewModel(){
         mainViewModel = registerViewModel(MainViewModel.class);
     }
-
-
 
     @Override
     public void getRemoteData(){
@@ -203,7 +202,7 @@ public class MainFragment extends BaseFragment<FragmentMainBinding>{
             imageAdapter.notifyDataSetChanged();
         }else if(key.equals(Constants.GET_MAIN_WECHAT_ARTICLE)){
             weChatArticleList = (List<WeChatArticle>) value;
-            setGridViewAdapter();
+            loadGridViewPager();
         }else if(key.equals(Constants.REQUEST_ERROR)){
             refreshLayout.finishRefresh();
             refreshLayout.finishLoadMore();
@@ -211,16 +210,30 @@ public class MainFragment extends BaseFragment<FragmentMainBinding>{
         }
     }
 
-    private void setGridViewAdapter(){
-        gridViewPager.setAdapter(new GridViewPagerAdapter<WeChatArticle>(weChatArticleList){
-            @Override
-            public void bindData(GridRecyclerAdapter.ViewHolder viewHolder, WeChatArticle weChatArticle, int position){
-                ShapeDrawable shapeDrawable = new ShapeDrawable();
-                shapeDrawable.setShape(/*new OvalShape()*/new RoundRectShape(new float[]{20,20,20,20,20,20,20,20},null,null));
-                shapeDrawable.getPaint().setColor(colors[position % colors.length]);
-                viewHolder.setText(R.id.tv_home_author_icon, String.valueOf(weChatArticle.getName().charAt(0))).
-                        setText(R.id.tv_home_author_name, weChatArticle.getName()).setBackground(R.id.tv_home_author_icon, shapeDrawable);
-            }
-        });
+    private void loadGridViewPager(){
+        totalPage = (int) Math.ceil(weChatArticleList.size() * 1.0 / mPageSize);
+        viewPagerList = new ArrayList<View>();
+        for(int i = 0; i < totalPage; i++){
+            //每个页面都是inflate出一个新实例
+            final MyGridView gridView = (MyGridView) View.inflate(getContext(), R.layout.gridview_main, null);
+            gridView.setAdapter(new MyGridViewAdpter(getContext(), weChatArticleList, i, mPageSize));
+            gridView.setNumColumns(5);
+            //添加item点击监听
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3){
+                    // TODO Auto-generated method stub
+                    Object obj = gridView.getItemAtPosition(position);
+                    if(obj != null && obj instanceof WeChatArticle){
+                        goWeChatDetailActivity(weChatArticleList.get(position));
+                    }
+                }
+            });
+            //每一个GridView作为一个View对象添加到ViewPager集合中
+            viewPagerList.add(gridView);
+        }
+        //设置ViewPager适配器
+        viewpager.setAdapter(new MyViewPagerAdapter(viewPagerList));
     }
 }

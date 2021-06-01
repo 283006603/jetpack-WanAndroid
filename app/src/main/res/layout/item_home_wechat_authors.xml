@@ -3,29 +3,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/tv_home_author_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:scaleType="centerCrop"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        tools:text="测试" />
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+   
+    
+    <RelativeLayout
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_10"
+        >
+        
+        <com.example.practice.widge.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ima_bac"
+            android:src="@color/color_white"
+             />
+        
+    
+        <TextView
+            android:id="@+id/tv_home_author_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            tools:text="测"
+            />
+        
+    </RelativeLayout>
+    
 
     <TextView
         android:id="@+id/tv_home_author_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_5"
         android:maxLength="5"
         android:singleLine="true"
         android:textColor="@color/color_333"
         android:textSize="16sp"
-        tools:text="公众号" />
+        tools:text="公众号"
+        />
 
 </LinearLayout>

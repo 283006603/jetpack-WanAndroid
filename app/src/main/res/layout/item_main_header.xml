@@ -10,18 +10,21 @@
     <!-- TODO: Update blank fragment layout -->
   <com.youth.banner.Banner
       android:layout_width="match_parent"
-      android:layout_height="@dimen/dp_180"
+      android:layout_height="@dimen/dp_160"
       android:id="@+id/main_banner"
       app:banner_auto_loop="true"
+      app:banner_indicator_normal_color="@color/color_ffb945"
+      app:banner_indicator_selected_color="@color/color_fc5015"
       />
     
-    <com.example.practice.widge.gridviewpager.GridViewPager
+    <com.example.practice.widge.GridViewPager
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_210"
+        android:layout_height="wrap_content"
         android:layout_below="@id/main_banner"
-        android:id="@+id/viewpager"
-        android:background="@android:color/white"
-        app:itemLayoutId="@layout/item_home_wechat_authors"
+        android:id="@+id/view_pager"
         android:gravity="center_vertical"
         />
+    
+
+    
 </RelativeLayout>

@@ -9,11 +9,11 @@
         <attr name="selectedColor" format="color" />
     </declare-styleable>
     
-    <declare-styleable name="GridViewPager">
+    <!--<declare-styleable name="GridViewPager">
         <attr name="itemLayoutId" format="integer|reference" />
         <attr name="columnSize" format="integer|reference" />
         <attr name="rowSize" format="integer|reference" />
-    </declare-styleable>
+    </declare-styleable>-->
     
     <declare-styleable name="ItemView">
         <attr name="leftIcon" format="integer|reference" />
@@ -39,4 +39,5 @@
     </declare-styleable>
     
     
+  
 </resources>
