@@ -48,8 +48,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/str_hot_search"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     />
             
             
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="搜索历史"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="@dimen/dp_10"
                     />
     

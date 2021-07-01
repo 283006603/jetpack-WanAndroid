@@ -8,7 +8,7 @@
     <!-- TODO: Update blank fragment layout -->
   <ImageView
       android:layout_width="match_parent"
-      android:layout_height="@dimen/dp_180"
+      android:layout_height="180dp"
       android:id="@+id/ima_banner"
       android:scaleType="fitXY"
       />

@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/iv_meizi_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_200"
+        android:layout_height="200dp"
         android:layout_marginLeft="2dp"
         android:layout_marginTop="2dp"
         android:layout_marginRight="2dp"

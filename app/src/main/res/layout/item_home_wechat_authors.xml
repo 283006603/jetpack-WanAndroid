@@ -10,9 +10,9 @@
    
     
     <RelativeLayout
-        android:layout_width="@dimen/dp_50"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         >
         
         <com.example.practice.widge.CircleImageView
@@ -40,7 +40,7 @@
         android:id="@+id/tv_home_author_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginTop="5dp"
         android:maxLength="5"
         android:singleLine="true"
         android:textColor="@color/color_333"

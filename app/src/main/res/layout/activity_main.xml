@@ -24,7 +24,7 @@
             android:checked="true"
             android:text="首页"
             android:drawableTop="@drawable/main_rb_selector"
-            android:paddingTop="@dimen/dp_5"
+            android:paddingTop="5dp"
             />
         
     
@@ -40,7 +40,7 @@
             android:checked="true"
             android:text="项目"
             android:drawableTop="@drawable/main_system_selector"
-            android:paddingTop="@dimen/dp_5"
+            android:paddingTop="5dp"
             />
     
         <RadioButton
@@ -53,7 +53,7 @@
             android:checked="true"
             android:text="体系"
             android:drawableTop="@drawable/main_project_selector"
-            android:paddingTop="@dimen/dp_5"
+            android:paddingTop="5dp"
             />
     
         <RadioButton
@@ -66,7 +66,7 @@
             android:checked="true"
             android:text="我的"
             android:drawableTop="@drawable/main_mine_selector"
-            android:paddingTop="@dimen/dp_5"
+            android:paddingTop="5dp"
             />
         
     </RadioGroup>

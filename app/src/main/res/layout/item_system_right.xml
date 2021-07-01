@@ -13,11 +13,11 @@
         android:layout_height="wrap_content"
         android:text="安卓弘扬"
         android:gravity="center"
-        android:textSize="@dimen/sp_14"
+        android:textSize="14sp"
         android:textColor="#565658"
         android:singleLine="true"
         android:ellipsize="end"
-        android:padding="@dimen/dp_10"
+        android:padding="10dp"
         
         />
 </LinearLayout>

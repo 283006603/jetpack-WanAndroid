@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
-def TEST_VERSION_CODE = 2
-def TEST_VERSION_NAME = '1.0.2'
+def TEST_VERSION_CODE = 3
+def TEST_VERSION_NAME = '1.0.3'
 
-def RTM_VERSION_CODE = 2
-def RTM_VERSION_NAME = '1.0.2'
+def RTM_VERSION_CODE = 3
+def RTM_VERSION_NAME = '1.0.3'
 
 android {
     compileSdkVersion 29
@@ -121,7 +121,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation project(path: ':mvvmlibrary')
-    implementation project(path: ':ScreenAdaptation')
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -174,4 +173,6 @@ dependencies {
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     //图片缩放
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    //头条适配
+    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
 }

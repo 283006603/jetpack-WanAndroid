@@ -18,12 +18,12 @@
         >
     
         <com.example.practice.widge.DampScrollView
-            android:layout_width="@dimen/dp_120"
+            android:layout_width="120dp"
             android:layout_height="match_parent"
             android:scrollbars="none"
             >
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="@dimen/dp_120"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/left_recycleview"
                 />

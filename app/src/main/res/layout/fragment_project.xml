@@ -13,7 +13,7 @@
     
    <com.google.android.material.tabs.TabLayout
        android:layout_width="match_parent"
-       android:layout_height="@dimen/dp_45"
+       android:layout_height="45dp"
        android:id="@+id/table_layout"
        app:tabTextColor="@color/color_333"
        app:tabBackground="@color/color_white"

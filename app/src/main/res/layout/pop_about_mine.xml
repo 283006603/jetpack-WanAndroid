@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_blog"
         android:text="@string/str_myblog"
-        android:textSize="@dimen/sp_22"
+        android:textSize="22sp"
         android:textColor="@color/color_3a3d4e"
         android:textStyle="bold"
         />
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/str_blog_address"
-        android:textSize="@dimen/sp_18"
+        android:textSize="18sp"
         android:autoLink="all"
         />
     
@@ -29,17 +29,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_github"
         android:text="Github"
-        android:textSize="@dimen/sp_22"
+        android:textSize="22sp"
         android:textColor="@color/color_3a3d4e"
         android:textStyle="bold"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="20dp"
         />
     
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/str_github_address"
-        android:textSize="@dimen/sp_18"
+        android:textSize="18sp"
         android:autoLink="all"
         />
 

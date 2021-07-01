@@ -10,7 +10,7 @@
     <!-- TODO: Update blank fragment layout -->
   <com.youth.banner.Banner
       android:layout_width="match_parent"
-      android:layout_height="@dimen/dp_160"
+      android:layout_height="160dp"
       android:id="@+id/main_banner"
       app:banner_auto_loop="true"
       app:banner_indicator_normal_color="@color/color_ffb945"

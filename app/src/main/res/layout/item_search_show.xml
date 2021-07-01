@@ -13,12 +13,12 @@
     
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_30"
+        android:layout_height="30dp"
         android:gravity="center"
         android:background="@drawable/shape_input"
-        android:layout_marginLeft="@dimen/dp_8"
-        android:layout_marginRight="@dimen/dp_8"
-        android:layout_marginBottom="@dimen/dp_3"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         >
     
     

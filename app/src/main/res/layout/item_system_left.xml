@@ -10,21 +10,21 @@
     <TextView
         android:id="@+id/tv_left"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
+        android:layout_height="40dp"
         android:text="安卓弘扬"
         android:gravity="center"
-        android:textSize="@dimen/sp_14"
+        android:textSize="14sp"
         android:textColor="#000000"
         android:singleLine="true"
         android:ellipsize="end"
         android:background="@drawable/selector_tv_bg"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingRight="@dimen/dp_10"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         />
     
     <ImageView
-        android:layout_width="@dimen/dp_3"
-        android:layout_height="@dimen/dp_20"
+        android:layout_width="3dp"
+        android:layout_height="20dp"
         android:id="@+id/ima_lable"
         android:layout_centerVertical="true"
         android:background="#CF3E29"

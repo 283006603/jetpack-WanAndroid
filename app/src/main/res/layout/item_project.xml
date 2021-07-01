@@ -2,14 +2,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_110"
+    android:layout_height="110dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.MainFragment"
     app:cardBackgroundColor="@color/color_white"
-    app:cardCornerRadius="@dimen/dp_8"
-    android:layout_marginLeft="@dimen/dp_10"
-    android:layout_marginTop="@dimen/dp_10"
-    android:layout_marginRight="@dimen/dp_10"
+    app:cardCornerRadius="8dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
     >
     
     
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:padding="@dimen/dp_10">
+        android:padding="10dp">
     
     <TextView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
         android:id="@+id/tv_title"
         android:text="哈哈抢"
         android:textColor="#000000"
-        android:textSize="@dimen/sp_18"
+        android:textSize="18sp"
         android:ellipsize="end"
         android:singleLine="true"
         />
@@ -37,8 +37,8 @@
         android:id="@+id/tv_shareuser"
         android:text="分享人"
         android:layout_below="@id/tv_title"
-        android:textSize="@dimen/sp_14"
-        android:layout_marginTop="@dimen/dp_10"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
         />
     
     
@@ -48,12 +48,12 @@
         android:id="@+id/tv_time"
         android:text="时间"
         android:layout_below="@id/tv_shareuser"
-        android:textSize="@dimen/sp_14"
-        android:layout_marginTop="@dimen/dp_10"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
         />
         
         <ImageView
-            android:layout_width="@dimen/dp_100"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:id="@+id/ima_show"
             android:layout_alignParentRight="true"
