@@ -25,7 +25,7 @@
         <activity android:name=".view.activity.WeChatDetailActivity" />
         <activity android:name=".view.activity.SystemDetailActivity" />
         <activity android:name=".view.activity.WebViewActivity" />
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.MainActivity" android:screenOrientation="portrait">
     
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -9,7 +9,7 @@ import com.example.practice.bean.ProjectPageBean;
 import com.example.practice.config.Constants;
 import com.example.practice.databinding.FragmentProjectBinding;
 import com.example.practice.viewmodel.MainViewModel;
-import com.google.android.material.tabs.TabLayout;
+import com.example.practice.widge.MySlidingTabLayout;
 import com.wljy.mvvmlibrary.annotation.Event;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import androidx.viewpager.widget.ViewPager;
  */
 public class ProjectFragment extends BaseFragment<FragmentProjectBinding>{
 
-    TabLayout tableLayout;
+    MySlidingTabLayout tableLayout;
     ViewPager viewPager;
 
     private MainViewModel mainViewModel;
@@ -44,6 +44,12 @@ public class ProjectFragment extends BaseFragment<FragmentProjectBinding>{
     }
 
     @Override
+    public void initListener(){
+        super.initListener();
+
+    }
+
+    @Override
     public void getRemoteData(){
         mainViewModel.getProject();
     }
@@ -59,9 +65,14 @@ public class ProjectFragment extends BaseFragment<FragmentProjectBinding>{
     }
 
     private void relateVpAndTab(){
+        //      https://www.jianshu.com/p/8fdd6f2719b0
         ProjectPageAdapter pageAdapter = new ProjectPageAdapter(getChildFragmentManager(), projectPageBeans);
+        String titles[] = new String[projectPageBeans.size()];
+        for(int i = 0; i < projectPageBeans.size(); i++){
+            titles[i] = projectListBeans.get(i).getName();
+        }
         viewPager.setAdapter(pageAdapter);
-        tableLayout.setupWithViewPager(viewPager);
+        tableLayout.setViewPager(viewPager, titles);
     }
 
     private List<ProjectPageBean> changePageFragment(){

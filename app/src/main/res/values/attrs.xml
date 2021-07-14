@@ -38,6 +38,10 @@
         <attr name="civ_circle_background_color" format="color" />
     </declare-styleable>
     
+    <declare-styleable name="SlidingTabLayout">
+        <attr name="tl_indicator_drawable" format="reference" />
+    </declare-styleable>
+    
     
   
 </resources>

@@ -10,15 +10,41 @@
     <!-- TODO: Update blank fragment layout -->
     
     
-    
-   <com.google.android.material.tabs.TabLayout
+   <!--<com.google.android.material.tabs.TabLayout
        android:layout_width="match_parent"
        android:layout_height="45dp"
        android:id="@+id/table_layout"
        app:tabTextColor="@color/color_333"
        app:tabBackground="@color/color_white"
        app:tabMode="scrollable"
-       />
+       />-->
+<!--    https://www.jianshu.com/p/8fdd6f2719b0-->
+<!--    app:tl_indicator_drawable="@mipmap/slider_blue"-->
+    <com.example.practice.widge.MySlidingTabLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:id="@+id/table_layout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/round_f5f3ff_32"
+        app:tl_divider_color="@android:color/transparent"
+        app:tl_divider_padding="0dp"
+        app:tl_divider_width="0dp"
+        app:tl_indicator_width="50dp"
+        app:tl_indicator_width_equal_title="false"
+        app:tl_indicator_color="#e6a201"
+        app:tl_indicator_corner_radius="30dp"
+        app:tl_indicator_height="0dp"
+        app:tl_indicator_margin_bottom="3dp"
+        app:tl_tab_space_equal="false"
+        app:tl_textSelectColor="#4B34DE"
+        app:tl_textUnselectColor="@color/color_666"
+        app:tl_textsize="14sp"
+        app:tl_underline_color="@android:color/transparent"
+        app:tl_underline_height="0dp"
+        />
+    
     
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
