@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 def TEST_VERSION_CODE = 3
 def TEST_VERSION_NAME = '1.0.3'
