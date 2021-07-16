@@ -69,9 +69,15 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding?>() {
             leftSelect = position
             //--------
         })
-        rightAdapter?.setOnTagSelectListener { position, tagPosition ->
-            goWebActivity(list[position]?.articles?.get(tagPosition))
-        }
+//        rightAdapter?.setOnTagSelectListener { position, tagPosition ->
+//            goWebActivity(list[position]?.articles?.get(tagPosition))
+//        }
+        rightAdapter?.setOnTagSelectListener(object : NavigationRightAdapter.TagSelectListener {
+            override fun onTagSelect(positon: Int, tagPosition: Int) {
+                goWebActivity(list[positon]?.articles?.get(tagPosition))
+            }
+
+        })
         rightRecycleview?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
