@@ -5,9 +5,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.practice.R
 import com.example.practice.adapter.MineAdapter
@@ -90,14 +88,21 @@ class MineFragment : BaseFragment<FragmentMineBinding?>() {
                     }
                 }
             }
+
+
+
     }
 
     override fun getRemoteData() {}
+
     private fun showAboutPop() {
         val view = LayoutInflater.from(context).inflate(R.layout.pop_about_mine, null, false)
         if (popupWindow == null) {
             popupWindow = FullPopupwindow(context)
             popupWindow?.contentView = view
+        }
+        view?.setOnClickListener {
+            popupWindow?.dismiss()
         }
         popupWindow?.showAtLocation(activity?.window?.decorView, Gravity.START, 0, 0)
     }

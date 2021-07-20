@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-noarg"
 
 def TEST_VERSION_CODE = 3
 def TEST_VERSION_NAME = '1.0.3'
@@ -85,7 +86,9 @@ android {
     viewBinding {
         enabled = true
     }
-
+    androidExtensions {
+        experimental = true
+    }
 
     buildTypes {
         release {
@@ -105,6 +108,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
+}
+
+//空构造方法
+noArg {
+    annotation("com.example.practice.config.NoArg")
 }
 
 repositories {
@@ -144,6 +154,8 @@ dependencies {
 
     //非必须，根据自己需求选择 RxHttp默认内置了GsonConverter
     implementation 'com.ljx.rxhttp:converter-fastjson:2.4.0'
+    //使用argus反射创建无参构造，使用parcelble解析需要无参
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
     //动态申请库
     implementation 'pub.devrel:easypermissions:3.0.0'
     /*//id注解库废弃
