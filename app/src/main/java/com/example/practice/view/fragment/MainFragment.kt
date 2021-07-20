@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practice.R
@@ -18,6 +19,7 @@ import com.example.practice.bean.PageList
 import com.example.practice.bean.WeChatArticle
 import com.example.practice.config.Constants
 import com.example.practice.databinding.FragmentMainBinding
+import com.example.practice.view.activity.SearchActivity
 import com.example.practice.view.activity.WeChatDetailActivity
 import com.example.practice.view.activity.WebViewActivity
 import com.example.practice.viewmodel.MainViewModel
@@ -36,7 +38,7 @@ import kotlin.collections.ArrayList
  * create an instance of this fragment.
  */
 class MainFragment : BaseFragment<FragmentMainBinding?>() {
-
+    var relaSearch : RelativeLayout?=null
     private var mainRecycleView: RecyclerView? = null
     private var refreshLayout: SmartRefreshLayout? = null
     private var mainViewModel: MainViewModel? = null
@@ -59,6 +61,7 @@ class MainFragment : BaseFragment<FragmentMainBinding?>() {
 
     override fun initView(state: Bundle?) {
         super.initView(state)
+        relaSearch=binding?.itemsearch?.relaSearch
         refreshLayout = binding?.refreshLayout
         mainRecycleView = binding?.mainRecycleview
         mainRecycleView?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -101,6 +104,14 @@ class MainFragment : BaseFragment<FragmentMainBinding?>() {
         //banner点击时间
         mainBanner?.setOnBannerListener { data, position ->
             goWebActivityForBanner(bannerBeanList?.get(position))
+        }
+
+
+        relaSearch?.setOnClickListener{
+            val bundle=Bundle()
+            bundle.putInt("type",1)
+            bundle.putString("str","按作者名称搜索文章")
+            activity(SearchActivity::class.java, bundle)
         }
     }
 
