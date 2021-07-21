@@ -1,38 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_group"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.RegisterActivity"
-    android:orientation="vertical"
-    android:gravity="center"
-    >
+    android:background="#FFFFFF"
+    android:orientation="vertical">
     
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_register_account"
-        />
     
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_register_pwd"
-        />
     
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit_register_pwd_again"
-        />
-    
-    <Button
+    <TextView
+        android:id="@+id/register_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/bt_confirm"
         android:text="注册"
+        android:textColor="@color/title_black"
+        android:textSize="36sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         />
     
+    <LinearLayout
+        android:id="@+id/register_account_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginTop="64dp"
+        android:layout_below="@id/register_tv"
+        android:gravity="center">
+        
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_account"
+            android:contentDescription="@null" />
+        
+        <EditText
+            android:id="@+id/edit_register_account"
+            style="@style/style_circle_edit"
+            android:hint="@string/login_account_tint"
+            android:layout_marginStart="6dp"/>
+    </LinearLayout>
     
-</LinearLayout>
+    <View
+        android:id="@+id/login_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_divider"
+        android:layout_below="@id/register_account_group"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp" />
+    
+    <LinearLayout
+        android:id="@+id/register_pwd_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginTop="1dp"
+        android:layout_below="@id/login_divider"
+        android:gravity="center">
+        
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_password"
+            android:contentDescription="@null" />
+        
+        <EditText
+            android:id="@+id/edit_register_pwd"
+            style="@style/style_circle_edit"
+            android:hint="@string/login_password_tint"
+            android:inputType="textPassword"
+            android:layout_marginStart="6dp" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/register_pwd__again_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginTop="1dp"
+        android:layout_below="@id/register_pwd_group"
+        android:gravity="center">
+        
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_password"
+            android:contentDescription="@null" />
+        
+        <EditText
+            android:id="@+id/edit_register_pwd_again"
+            style="@style/style_circle_edit"
+            android:hint="@string/login_password_tint_again"
+            android:inputType="textPassword"
+            android:layout_marginStart="6dp" />
+    </LinearLayout>
+    
+    <View
+        android:id="@+id/login_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_divider"
+        android:layout_below="@id/register_pwd__again_group"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp" />
+    
+    <View
+        android:id="@+id/register_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_divider"
+        android:layout_below="@id/register_pwd_group"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp" />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/register_divider"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_vertical">
+        
+        <Button
+            android:id="@+id/bt_confirm"
+            style="@style/style_circle_btn"
+            android:background="@drawable/bg_conner_bottom_blue"
+            android:layout_marginTop="32dp"
+            android:text="注册" />
+        
+    </LinearLayout>
+</RelativeLayout>

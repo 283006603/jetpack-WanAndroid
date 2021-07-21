@@ -5,4 +5,9 @@
     <color name="colorAccent">#03DAC5</color>
     
     <color name="white_f4f5f6">#fff4f5f6</color>
+    <color name="title_black">#222222</color>
+    <color name="grey_divider">#E5E5E5</color>
+    <color name="comment_text">#5b5d5c</color>
+    <color name="grey">#cccccc</color>
+    
 </resources>

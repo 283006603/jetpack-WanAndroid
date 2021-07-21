@@ -10,4 +10,8 @@
     <string name="str_myblog">我的博客</string>
     <string name="str_blog_address">https://www.jianshu.com/u/f19974c98abc</string>
     <string name="str_github_address">https://github.com/283006603</string>
+    <string name="login_account_tint">请输入用户名</string>
+    <string name="login_password_tint">请输入用密码</string>
+    <string name="login_password_tint_again">请再次输入用密码</string>
+    
 </resources>

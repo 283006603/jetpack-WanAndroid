@@ -13,6 +13,8 @@ import com.example.practice.base.BaseFragment
 import com.example.practice.databinding.FragmentMineBinding
 import com.example.practice.utils.CacheToolsUtil
 import com.example.practice.utils.FullPopupwindow
+import com.example.practice.utils.SharePrefUtil
+import com.example.practice.view.activity.LoginActivity
 import com.example.practice.view.activity.MeiZiActivity
 import com.example.practice.widge.QQHeaderSrollView
 import java.util.*
@@ -61,11 +63,15 @@ class MineFragment : BaseFragment<FragmentMineBinding?>() {
         val map5: MutableMap<String, Any> = HashMap()
         map5["title"] = "清除缓存"
         map5["image"] = R.drawable.ic_mine_favorite
+        val map6: MutableMap<String, Any> = HashMap()
+        map6["title"] = "切换账号"
+        map6["image"] = R.drawable.ic_mine_favorite
         list.add(map1)
         list.add(map2)
         list.add(map3)
         list.add(map4)
         list.add(map5)
+        list.add(map6)
     }
 
     override fun initListener() {
@@ -86,9 +92,14 @@ class MineFragment : BaseFragment<FragmentMineBinding?>() {
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
+                    6 -> {
+                        SharePrefUtil.clear(context)
+                        activity?.finish()
+                        activity(LoginActivity::class.java)
+                    }
+
                 }
             }
-
 
 
     }

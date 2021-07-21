@@ -36,24 +36,26 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
         super.initViews(savedInstanceState)
         editLoginAccount = binding.editLoginAccount
         editLoginPwd = binding.editLoginPwd
-        btRegister = binding.btRegister
         btLoginConfirm = binding.btLoginConfirm
+        btRegister = binding.btRegister
         autoLogin()
     }
 
     private fun autoLogin() {
+        btRegister?.setOnClickListener(this)
+        btLoginConfirm?.setOnClickListener(this)
+
         var isLogin = SharePrefUtil.getBoolean(this, Constants.ISLOGIN, false)
         if (isLogin) {
             editLoginAccount?.setText(SharePrefUtil.getString(this, Constants.ACCOUNT, ""))
             editLoginPwd?.setText(SharePrefUtil.getString(this, Constants.PASSWORD, ""))
-            btLoginConfirm?.performClick()
+            btLoginConfirm?.performClick()//注意顺序，一定要先setListener
         }
     }
 
     override fun initListener() {
-        btRegister?.setOnClickListener(this)
-        btLoginConfirm?.setOnClickListener(this)
     }
+
 
     override fun getRemoteData() {
     }
@@ -88,6 +90,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
             SharePrefUtil.saveString(this, Constants.ACCOUNT, str_account)
             SharePrefUtil.saveString(this, Constants.PASSWORD, str_pwd)
             activity(MainActivity::class.java)
+            finish()
 
         }else if (key == Constants.REQUEST_ERROR) {
             Toast.makeText(this, `object` as String, Toast.LENGTH_SHORT).show()

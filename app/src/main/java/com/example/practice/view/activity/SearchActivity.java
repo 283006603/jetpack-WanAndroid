@@ -229,17 +229,22 @@ public class SearchActivity extends BaseActivity<ActivitySearchBinding>{
             @Override
             public void run(){
                 hotKeyHistoryBeans = hotKeyHistoryDao.queryList();
-                Collections.reverse(hotKeyHistoryBeans);
-                if(hotKeyHistoryBeans != null && hotKeyHistoryBeans.size() != 0){
-                    tagFlowHistory.setAdapter(new TagAdapter<HotKeyHistoryBean>(hotKeyHistoryBeans){
-                        @Override
-                        public View getView(FlowLayout parent, int position, HotKeyHistoryBean hotKeyHistoryBean){
-                            TextView textView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_tag_flow, tagFlowHistory, false);
-                            textView.setText(hotKeyHistoryBean.hot_name_history);
-                            return textView;
+                runOnUiThread(new Runnable(){
+                    @Override
+                    public void run(){
+                        Collections.reverse(hotKeyHistoryBeans);
+                        if(hotKeyHistoryBeans != null && hotKeyHistoryBeans.size() != 0){
+                            tagFlowHistory.setAdapter(new TagAdapter<HotKeyHistoryBean>(hotKeyHistoryBeans){
+                                @Override
+                                public View getView(FlowLayout parent, int position, HotKeyHistoryBean hotKeyHistoryBean){
+                                    TextView textView = (TextView) LayoutInflater.from(SearchActivity.this).inflate(R.layout.item_tag_flow, tagFlowHistory, false);
+                                    textView.setText(hotKeyHistoryBean.hot_name_history);
+                                    return textView;
+                                }
+                            });
                         }
-                    });
-                }
+                    }
+                });
             }
         };
         threadPoolExecutor.execute(runnable);

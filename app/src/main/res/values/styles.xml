@@ -8,4 +8,28 @@
         <item name="android:windowLightStatusBar">true</item>
         <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
     </style>
+    
+    
+    <style name="style_circle_edit">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/title_black</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:background">@null</item>
+    </style>
+    
+    
+    <style name="style_circle_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textColor">@color/white_f4f5f6</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginStart">64dp</item>
+        <item name="android:layout_marginEnd">64dp</item>
+    </style>
 </resources>
