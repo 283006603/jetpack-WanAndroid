@@ -43,6 +43,48 @@ WanAndroid项目架构基于Material Design + ViewModel+ViewBinding+Rxhttp+Room+
 
 ## 版本
 
+### v1.5.0
+1.首页增加搜索栏
+
+2.增加登录注册页面
+
+3.解决子线程查询数据库view刷新崩溃bug
+
+4.gradle统一依赖配置
+
+### v1.4.0
+1.今日头条全面适配UI
+
+2.优化tablayout显示效果
+
+3.view模块java全面变为kotlin
+
+### v1.3.0
+1.废弃butterknifer以及kotlin-extension
+
+2.封装viewbinding查找ID
+
+### v1.2.0
+1.导航栏双极联动
+
+2.解决数据库升级问题
+
+3.利用线程池数据库查找刷新
+
+### v1.1.0
+1.导航栏页面完成
+
+2.增加发车模块（干货集中营API）
+
+3.清除缓存功能
+
+### v1.0.1
+1."项目"模块搭建
+
+2.优化搜索框
+
+3.搜索热词显示
+
 ### v1.0.0
 1.主界面框架搭建
 
@@ -53,48 +95,6 @@ WanAndroid项目架构基于Material Design + ViewModel+ViewBinding+Rxhttp+Room+
 4.UI的美化
 
 5.提交第一版
-
-### v1.0.1
-1."项目"模块搭建
-
-2.优化搜索框
-
-3.搜索热词显示
-
-### v1.1.0
-1.导航栏页面完成
-
-2.增加发车模块（干货集中营API）
-
-3.清除缓存功能
-
-### v1.2.0
-1.导航栏双极联动
-
-2.解决数据库升级问题
-
-3.利用线程池数据库查找刷新
-
-### v1.3.0
-1.废弃butterknifer以及kotlin-extension
-
-2.封装viewbinding查找ID
-
-### v1.4.0
-1.今日头条全面适配UI
-
-2.优化tablayout显示效果
-
-3.view模块java全面变为kotlin
-
-### v1.5.0
-1.首页增加搜索栏
-
-2.增加登录注册页面
-
-3.解决子线程查询数据库view刷新崩溃bug
-
-4.gradle统一依赖配置
 
 ## 感谢
 
