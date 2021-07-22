@@ -62,7 +62,8 @@ public class MyApplication extends Application{
         IConverter converter = MyFastJsonConverter.create();
         RxHttp.setConverter(converter);
 
-        InitializeService.start(this);
+        InitializeService.Companion.start(this);
+
 
     }
 

@@ -1,0 +1,72 @@
+ext {
+    isAlone = false   //false:作为Lib组件存在，true:作为application存在
+
+    androidEnv = [
+            compileSdkVersion: 30,
+            buildToolsVersion: '30.0.2',
+            minSdkVersion    : 21,
+            targetSdkVersion : 30,//平板为Android 10(29)
+            versionCode      : 1,
+            versionName      : '1.0.0',
+    ]
+
+    signEnv = [
+            path         : '..\\system_signature.keystore',
+            storePassword: '123456',
+            alias        : 'systemkey',
+            keyPassword  : '123456'
+    ]
+
+
+// 依赖库管理
+    mDependencies = [
+            appcompat       : 'androidx.appcompat:appcompat:1.2.0',
+            constraintlayout: 'androidx.constraintlayout:constraintlayout:2.0.4',
+            recyclerview    : 'androidx.recyclerview:recyclerview:1.2.0-alpha05',
+            //以下使用rxhttp为必须
+            rxhttp          : 'com.ljx.rxhttp:rxhttp:2.4.0',
+            okhttp          : 'com.squareup.okhttp3:okhttp:4.8.1',
+            compiler        : 'com.ljx.rxhttp:rxhttp-compiler:2.4.0',
+            //管理协程生命周期，页面销毁，关闭请求
+            coroutine       : 'com.ljx.rxlife:rxlife-coroutine:2.0.1',
+            //rxjava3
+            rxjava          : 'io.reactivex.rxjava3:rxjava:3.0.2',
+            rxandroid       : 'io.reactivex.rxjava3:rxandroid:3.0.0',
+            rxlifejava      : 'com.ljx.rxlife3:rxlife-rxjava:3.0.0',
+            //非必须，根据自己需求选择 RxHttp默认内置了GsonConverter
+            fastjson        : 'com.ljx.rxhttp:converter-fastjson:2.5.7',
+            ktreflect       : "org.jetbrains.kotlin:kotlin-reflect:1.3.72",
+            easypermissions : 'pub.devrel:easypermissions:3.0.0',
+            multidex        : 'androidx.multidex:multidex:2.0.1',
+            supportv4       : 'androidx.legacy:legacy-support-v4:1.0.0',
+            //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+            baseRecyclerView: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6',
+            glide           : 'com.github.bumptech.glide:glide:4.11.0',
+            //上下拉刷新框
+            refreshkernel   : 'com.scwang.smart:refresh-layout-kernel:2.0.1',
+            refreshclass    : 'com.scwang.smart:refresh-header-classics:2.0.1',
+            refreshbal      : 'com.scwang.smart:refresh-footer-ball:2.0.1',
+            //空试图布局
+            loadlayout      : 'com.github.czy1121:loadinglayout:1.0.1',
+            //banner
+            banner          : 'com.youth.banner:banner:2.1.0',
+            //design
+            design          : 'com.android.support:design:29.0.0',
+            //搜索/复选样式
+            flowlayout      : 'com.hyman:flowlayout-lib:1.1.2',
+            //图片缩放
+            photoview       : 'com.github.chrisbanes:PhotoView:2.0.0',
+            //头条适配
+            autosize        : 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1',
+            //导航栏https://github.com/H07000223/FlycoTabLayout
+            flytablelayout  : 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar',
+
+            logutils        : 'com.apkfuns.logutils:library:1.7.5',
+            // 吐司框架：https://github.com/getActivity/ToastUtils
+            toastUtils      : 'com.github.getActivity:ToastUtils:9.0',
+            lProgressView   : 'com.github.liys666666:LProgressView:V1.0.82',
+    ]
+
+}
+
+

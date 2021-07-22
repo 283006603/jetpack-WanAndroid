@@ -17,36 +17,6 @@ public class SharePrefUtil{
     private final static String SP_NAME = "config";
     private static SharedPreferences sp;
     private static Gson gson = new Gson();
-/*
-    public interface KEY {
-        String ClickCell = "clickCell";
-        String IsAutoLogin = "isAutoLogin";
-        String Identity = "identity";        //用户true，技术员false;
-        String TokenKey = "token";
-        String USERREGTIME = "userRegTime";
-        String COMPANYREGTIME = "companyRegTime";
-        String PERSONREGTIME = "personRegTime";
-        String FINDPASSWORDTIME = "findpasswordTime";
-        String SEARCHLIST = "searchList";
-        String SECONDHANDSEARCH = "secondhandSearch";
-        String LASTVERSION = "lastVersion";
-        String ISFIRSTUSE = "isFirstUse";
-        String CATEGORYUPDATETIME = "categoryUpdateTime";
-        String CATEGORYLIST = "categoryList";
-        String USERICONURL = "userIconUrl";
-        String USERNAME = "userName";
-        String MOBILE = "mobile";
-        String PUSHID = "pushId";
-        String USERISSETPUSH = "userIsSetPush";
-        String TECHISSETPUSH = "techIsSetPush";
-        String ISPUSH = "isPush";
-        String LATLONG = "nearLatLong";
-        String ONOROFFLINE = "onOrOffLine";
-        String PHOTOSDATA = "photosData";
-        String CLOCKINDEX = "clockIndex";
-    }
-*/
-
     public static SharedPreferences sharedPreferences = null;
     public static String fileName = "mySharedPreferences";
 

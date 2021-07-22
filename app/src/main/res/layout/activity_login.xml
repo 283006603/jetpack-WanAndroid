@@ -121,5 +121,17 @@
             android:background="@drawable/bg_conner_bottom_blue"
             android:layout_marginTop="12dp"
             android:text="注册" />
+    
+        <TextView
+            android:id="@+id/tv_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="50dp"
+            android:text="跳过"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
     </LinearLayout>
 </RelativeLayout>

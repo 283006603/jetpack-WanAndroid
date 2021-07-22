@@ -31,7 +31,7 @@ class ProjectPageFragment : BaseFragment<FragmentProjectPageBinding>() {
     var mainViewModel: MainViewModel? = null
     var page = 1
     var pageList: PageList<MainArticleBean>? = null
-    var mainArticleBeanList: MutableList<MainArticleBean>? = ArrayList()
+    var mainArticleBeanList: MutableList<MainArticleBean?> = ArrayList()
     var mAdapter: ProjectPageFragmentAdapter? = null
 
 

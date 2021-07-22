@@ -48,7 +48,7 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding?>() {
                 id = extras.getInt(Constants.ID, -1)
                 url = extras.getString(Constants.URL)
                 title = extras.getString(Constants.TITILE)
-                wvWeb?.loadUrl(url)
+                wvWeb?.loadUrl(url.toString())
             }
 
         }

@@ -2,32 +2,24 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-noarg"
+apply from: rootProject.file("config.gradle")
 
-def TEST_VERSION_CODE = 3
-def TEST_VERSION_NAME = '1.0.3'
+def TEST_VERSION_CODE = 5
+def TEST_VERSION_NAME = '1.0.5'
 
-def RTM_VERSION_CODE = 3
-def RTM_VERSION_NAME = '1.0.3'
+def RTM_VERSION_CODE = 5
+def RTM_VERSION_NAME = '1.0.5'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "30.0.0"
+    compileSdkVersion androidEnv.compileSdkVersion
+    buildToolsVersion androidEnv.buildToolsVersion
 
     project.archivesBaseName = "WanAndroid-AAC"
 
-    signingConfigs {
-        system {
-            storeFile file('..\\system_signature.keystore')
-            storePassword '123456'
-            keyAlias 'systemkey'
-            keyPassword '123456'
-        }
-    }
-
     defaultConfig {
         applicationId "com.example.practice"
-        minSdkVersion 24
-        targetSdkVersion 29
+        minSdkVersion androidEnv.minSdkVersion
+        targetSdkVersion androidEnv.targetSdkVersion
         versionCode TEST_VERSION_CODE
         versionName TEST_VERSION_NAME
 
@@ -49,9 +41,7 @@ android {
         }
 
         flavorDimensions "rtm"
-        signingConfig signingConfigs.system
     }
-
 
     signingConfigs {
         system {
@@ -130,65 +120,65 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation mDependencies.appcompat
+    implementation mDependencies.constraintlayout
     implementation project(path: ':mvvmlibrary')
-    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
+    implementation mDependencies.recyclerview
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //以下3个为必须，
-    implementation 'com.ljx.rxhttp:rxhttp:2.4.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.8.1' //rxhttp v2.2.2版本起，需要手动依赖okhttp
-    annotationProcessor 'com.ljx.rxhttp:rxhttp-compiler:2.4.0'
+    implementation mDependencies.rxhttp
+    implementation mDependencies.okhttp //rxhttp v2.2.2版本起，需要手动依赖okhttp
+    annotationProcessor mDependencies.compiler
     //生成RxHttp类，非kotlin项目，请使用annotationProcessor代替kapt
 
-    implementation 'com.ljx.rxlife:rxlife-coroutine:2.0.1' //管理协程生命周期，页面销毁，关闭请求
+    implementation mDependencies.coroutine//管理协程生命周期，页面销毁，关闭请求
 
     //rxjava3
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.2'
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
-    implementation 'com.ljx.rxlife3:rxlife-rxjava:3.0.0' //管理RxJava3生命周期，页面销毁，关闭请求
+    implementation mDependencies.rxjava
+    implementation mDependencies.rxandroid
+    implementation mDependencies.rxlifejava//管理RxJava3生命周期，页面销毁，关闭请求
 
 
     //非必须，根据自己需求选择 RxHttp默认内置了GsonConverter
-    implementation 'com.ljx.rxhttp:converter-fastjson:2.4.0'
+    implementation mDependencies.fastjson
     //使用argus反射创建无参构造，使用parcelble解析需要无参
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
+    implementation mDependencies.ktreflect
     //动态申请库
-    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation mDependencies.easypermissions
     /*//id注解库废弃
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'*/
     //解决65535问题
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation mDependencies.multidex
     //v4适应包
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation mDependencies.supportv4
     //adapter适配器
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1'
+    implementation mDependencies.baseRecyclerView
     //图片加载工具
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    //上下拉刷新框
-    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.1'//核心必须依赖
-    implementation 'com.scwang.smart:refresh-header-classics:2.0.1'//经典刷新头
-    implementation 'com.scwang.smart:refresh-footer-ball:2.0.1'//球脉冲加载
+    implementation mDependencies.glide
+
+    implementation mDependencies.refreshkernel//核心必须依赖
+    implementation mDependencies.refreshclass//经典刷新头
+    implementation mDependencies.refreshbal//球脉冲加载
     //Room数据库
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     //空视图布局
-    implementation 'com.github.czy1121:loadinglayout:1.0.1'
+    implementation mDependencies.loadlayout
     //轮播图
-    implementation 'com.youth.banner:banner:2.1.0'
+    implementation mDependencies.banner
     //tablayout与cardview
-    implementation 'com.android.support:design:29.0.0'
+    implementation mDependencies.design
     //搜索/复选样式
-    implementation 'com.hyman:flowlayout-lib:1.1.2'
+    implementation mDependencies.flowlayout
     //图片缩放
-    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation mDependencies.photoview
     //头条适配
-    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+    implementation mDependencies.autosize
     //导航栏https://github.com/H07000223/FlycoTabLayout
-    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation mDependencies.flytablelayout
 }

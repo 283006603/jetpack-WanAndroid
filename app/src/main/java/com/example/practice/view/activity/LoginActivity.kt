@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.practice.base.BaseActivity
 import com.example.practice.bean.LoginBean
@@ -25,6 +26,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
     var editLoginPwd: EditText? = null
     private var btRegister: Button? = null
     var btLoginConfirm: Button? = null
+    var tvSkip:TextView?=null
 
     var str_account: String? = null
     var str_pwd: String? = null
@@ -38,6 +40,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
         editLoginPwd = binding.editLoginPwd
         btLoginConfirm = binding.btLoginConfirm
         btRegister = binding.btRegister
+        tvSkip=binding.tvSkip
         autoLogin()
     }
 
@@ -54,6 +57,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
     }
 
     override fun initListener() {
+        tvSkip?.setOnClickListener(this)
     }
 
 
@@ -77,6 +81,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), View.OnClickListener
             }
 
             btRegister -> activity(RegisterActivity::class.java)
+
+            tvSkip -> {
+                activity(MainActivity::class.java)
+                finish()
+            }
 
         }
     }

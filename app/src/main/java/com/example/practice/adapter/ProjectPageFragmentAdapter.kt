@@ -14,11 +14,11 @@ import com.example.practice.bean.MainArticleBean
  * Created By 大苏打
  * on 2020/9/21
  */
-class ProjectPageFragmentAdapter(layoutResId: Int, data: MutableList<MainArticleBean>?) :
-    BaseQuickAdapter<MainArticleBean, BaseViewHolder>(layoutResId, data) {
+class ProjectPageFragmentAdapter(layoutResId: Int, data: MutableList<MainArticleBean?>) :
+    BaseQuickAdapter<MainArticleBean, BaseViewHolder>(layoutResId, data as MutableList<MainArticleBean>) {
     override fun convert(holder: BaseViewHolder, mainArticleBean: MainArticleBean) {
-        Log.d("ProjectPageFragmentAdap", mainArticleBean.envelopePic)
-        Log.d("ProjectPageFragmentAdap", mainArticleBean.title)
+        Log.d("ProjectPageFragmentAdap", mainArticleBean.envelopePic.toString())
+        Log.d("ProjectPageFragmentAdap", mainArticleBean.title.toString())
         holder.setText(R.id.tv_title, mainArticleBean.title)
         holder.setText(
             R.id.tv_shareuser,
