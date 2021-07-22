@@ -8,29 +8,25 @@ WanAndroid项目架构基于Material Design + ViewModel+ViewBinding+Rxhttp+Room+
 
 ## 预览图
 
+
 <div align="center">
-<img src="screenshots/QQ图片20210721154545.png">
-<img src="screenshots/QQ图片20210721154646.png">
+<img src="screenshots/QQ图片20210721154545.png"><img src="screenshots/QQ图片20210721154646.png">
 </div>
 
 <div align="center">
-<img src="screenshots/QQ图片20210721154805.png">
-<img src="screenshots/QQ图片20210721154829.png">
+<img src="screenshots/QQ图片20210721154805.png"><img src="screenshots/QQ图片20210721154829.png">
 </div>
 
 <div align="center">
-<img src="screenshots/QQ图片20210721155000.png">
-<img src="screenshots/QQ图片20210721155154.png">
+<img src="screenshots/QQ图片20210721155000.png"><img src="screenshots/QQ图片20210721155154.png">
 </div>
 
 <div align="center">
-<img src="screenshots/QQ图片20210721154226.png">
-<img src="screenshots/QQ图片20210721154723.png">
+<img src="screenshots/QQ图片20210721154226.png"><img src="screenshots/QQ图片20210721154723.png">
 </div>
 
 <div align="center">
-<img src="screenshots/QQ图片20210721155812.png">
-<img src="screenshots/QQ图片20210721161450.png">
+<img src="screenshots/QQ图片20210721155812.png"><img src="screenshots/QQ图片20210721161450.png">
 </div>
 
 ## 技能点
