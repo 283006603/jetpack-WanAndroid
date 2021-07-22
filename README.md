@@ -10,7 +10,7 @@ WanAndroid项目架构基于Material Design + ViewModel+ViewBinding+Rxhttp+Room+
 
 
 <div align="center">
-<img src="screenshots/QQ图片20210721154545.png"><img src="screenshots/QQ图片20210721154646.png">
+<img src="screenshots/QQ图片20210721154545.png" width="40%"><img src="screenshots/QQ图片20210721154646.png" width="40%">
 </div>
 
 <div align="center">
@@ -22,7 +22,7 @@ WanAndroid项目架构基于Material Design + ViewModel+ViewBinding+Rxhttp+Room+
 </div>
 
 <div align="center">
-<img src="screenshots/QQ图片20210721154226.png"><img src="screenshots/QQ图片20210721154723.png">
+<img src="screenshots/QQ图片20210721154226.png"><img src="screenshots/QQ图片20210721155723.png">
 </div>
 
 <div align="center">
