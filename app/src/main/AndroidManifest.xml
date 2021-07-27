@@ -16,7 +16,7 @@
         <activity android:name=".view.activity.MeiZiDetailActivity"></activity>
         <activity android:name=".view.activity.MeiZiActivity" />
         <activity android:name=".view.activity.RegisterActivity" />
-        <activity android:name=".view.activity.LoginActivity">
+        <activity android:name=".view.activity.LoginActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

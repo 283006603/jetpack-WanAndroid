@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-noarg"
+apply plugin: 'kotlin-kapt'
 apply from: rootProject.file("config.gradle")
 
 def TEST_VERSION_CODE = 5
@@ -28,11 +29,6 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
-                        //必须，告知RxHttp你依赖的okhttp版本，目前已适配 v3.12.0 - v4.8.1版本  (v4.3.0除外)
-                        rxhttp_okhttp          : '4.8.1',
-                        //使用asXxx方法时必须，告知RxHttp你依赖的rxjava版本，可传入rxjava2、rxjava3
-                        rxhttp_rxjava          : 'rxjava3',
-                        rxhttp_package         : 'rxhttp',  //非必须，指定RxHttp类包名
                         "room.schemaLocation"  : "$projectDir/schemas".toString(),
                         "room.incremental"     : "true",
                         "room.expandProjection": "true"
@@ -41,6 +37,13 @@ android {
         }
 
         flavorDimensions "rtm"
+    }
+
+    kapt {
+        arguments {
+            arg("rxhttp_rxjava", "rxjava3")  //can pass in RxJava2, RxJava3
+            arg("rxhttp_package", "rxhttp")  //Specifies the RxHttp class package
+        }
     }
 
     signingConfigs {
@@ -117,7 +120,6 @@ repositories {
     }
 }
 
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation mDependencies.appcompat
@@ -128,29 +130,24 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    //以下3个为必须，
+    //rxhttp以下3个为必须，
     implementation mDependencies.rxhttp
     implementation mDependencies.okhttp //rxhttp v2.2.2版本起，需要手动依赖okhttp
-    annotationProcessor mDependencies.compiler
     //生成RxHttp类，非kotlin项目，请使用annotationProcessor代替kapt
+    kapt  mDependencies.compiler
 
-    implementation mDependencies.coroutine//管理协程生命周期，页面销毁，关闭请求
-
-    //rxjava3
+    //rxhttp的费必须选项
+    implementation mDependencies.coroutine//Coroutine, Automatic close request
     implementation mDependencies.rxjava
     implementation mDependencies.rxandroid
     implementation mDependencies.rxlifejava//管理RxJava3生命周期，页面销毁，关闭请求
+    implementation mDependencies.fastjson//根据自己需求选择 RxHttp默认内置了GsonConverter
 
-
-    //非必须，根据自己需求选择 RxHttp默认内置了GsonConverter
-    implementation mDependencies.fastjson
     //使用argus反射创建无参构造，使用parcelble解析需要无参
     implementation mDependencies.ktreflect
     //动态申请库
     implementation mDependencies.easypermissions
-    /*//id注解库废弃
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'*/
+
     //解决65535问题
     implementation mDependencies.multidex
     //v4适应包
@@ -182,3 +179,4 @@ dependencies {
     //导航栏https://github.com/H07000223/FlycoTabLayout
     implementation mDependencies.flytablelayout
 }
+
